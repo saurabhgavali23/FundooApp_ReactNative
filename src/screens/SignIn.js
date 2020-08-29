@@ -8,13 +8,11 @@ import {
   StatusBar,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage'
-import {useHistory} from 'react-router-native';
 import { login } from '../services/userService'
 import { setSnackBarMsg } from '../config/config';
 
 const SignIn = ({navigation}) => {
 
-  const history = useHistory();
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const [EmailError, setEmailError] = useState('');
@@ -25,6 +23,7 @@ const SignIn = ({navigation}) => {
     login(Email,Password).then(res=>{
       AsyncStorage.setItem('userId', res.data.id);
       setSnackBarMsg("Login Sucessfull")
+      navigation.navigate('dashboard')
     }).catch(err=>{
       setSnackBarMsg("Login Failed")
     })

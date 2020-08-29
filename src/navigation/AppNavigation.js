@@ -5,6 +5,7 @@ import SignIn from '../screens/SignIn';
 import SignUp from '../screens/SignUp';
 import ResetPassword from '../screens/ResetPassword';
 import SendEmail from '../screens/SendEmail';
+import DashBoard from '../components/DashBoard';
 
 const stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ const AppNavigation = () => {
         <stack.Screen options={{headerShown: false}} name="signup" component={SignUp}/>
         <stack.Screen options={{headerShown: false}} name="resetpass" component={ResetPassword}/>
         <stack.Screen options={{headerShown: false}} name="sendemail" component={SendEmail}/>
+        <stack.Screen options={{headerShown: false}} name="dashboard" component={DashBoard}/>
       </stack.Navigator>
     </NavigationContainer>
   );

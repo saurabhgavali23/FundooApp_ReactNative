@@ -1,12 +1,10 @@
 import React,{useState} from 'react';
 import {View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
-import { useHistory } from 'react-router-native';
 import { registerData } from '../services/userService'
 import { setSnackBarMsg } from '../config/config';
 
 const SignUp = ({navigation}) => {
 
-  const history = useHistory();
   const [FirstName, setFirstName] = useState('')
   const [FirstNameError, setFirstNameError] = useState('')
   const [LastName, setLastName] = useState('')
