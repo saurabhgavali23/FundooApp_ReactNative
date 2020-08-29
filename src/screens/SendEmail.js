@@ -8,19 +8,39 @@ import {
   StatusBar
 } from 'react-native';
 import {useHistory} from 'react-router-native';
-import {confirmPassword} from '../services/userService';
+import {sendEmail} from '../services/userService';
+import { setSnackBarMsg } from '../config/config';
 
 const SendEmail = () => {
   const history = useHistory();
 
-  const [ConfirmPassword, setConfirmPassword] = useState('');
+  const [Email, setEmail] = useState('');
+  const [EmailError, setEmailError] = useState('');
+  const [isValid, setisValid] = useState(true);
 
   const handleChange = () => {
-    console.log(ConfirmPassword, NewPassword);
-    confirmPassword(ConfirmPassword, NewPassword)
-      .then((res) => {})
-      .catch((err) => {});
+    console.log(Email);
+    sendEmail(Email)
+      .then((res) => {
+        if(res.status == 200){
+          setSnackBarMsg("Email Sent ")
+        }
+      })
+      .catch((err) => {
+        setSnackBarMsg("Faild to sent Email")
+      });
   };
+
+  const emailValidation = () =>{
+    var emailReg = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+    if(!emailReg.test(Email)){
+      setEmailError("Invalid Email")
+      setisValid(false)
+    }else{
+      setEmailError('')
+      setisValid(true)
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -29,11 +49,18 @@ const SendEmail = () => {
       <TextInput
         style={styles.input}
         placeholder="Email"
-        onChangeText={(value) => setConfirmPassword(value)}
-        value={ConfirmPassword}
+        onChangeText={(value) => setEmail(value)}
+        onBlur={emailValidation}
+        value={Email}
       />
+      {isValid === false ? 
+        <Text style={styles.errorText}>{EmailError}</Text>: null
+        } 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.userButton} onPress={handleChange}>
+        <TouchableOpacity style={styles.userButton} 
+        onPress={handleChange}
+        disabled={!isValid}
+        >
           <Text style={styles.btnText}>Reset Password</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -84,5 +111,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '90%',
   },
+
+  errorText:{
+    color: 'red',
+    fontSize: 17,
+    textAlign: 'right',
+  }
 });
 export default SendEmail;

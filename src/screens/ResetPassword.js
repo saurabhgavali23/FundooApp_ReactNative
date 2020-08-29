@@ -8,7 +8,6 @@ import {
   StatusBar
 } from 'react-native';
 import {useHistory} from 'react-router-native';
-import {confirmPassword} from '../services/userService';
 
 const ResetPassword = () => {
   const history = useHistory();
@@ -18,9 +17,6 @@ const ResetPassword = () => {
 
   const handleChange = () => {
     console.log(ConfirmPassword, NewPassword);
-    confirmPassword(ConfirmPassword, NewPassword)
-      .then((res) => {})
-      .catch((err) => {});
   };
 
   return (

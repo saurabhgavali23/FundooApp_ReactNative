@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   StatusBar,
 } from 'react-native';
-
+import AsyncStorage from '@react-native-community/async-storage'
 import {useHistory} from 'react-router-native';
 import { login } from '../services/userService'
 import { setSnackBarMsg } from '../config/config';
@@ -23,6 +23,7 @@ const SignIn = () => {
 
   const handleChange = () => {
     login(Email,Password).then(res=>{
+      AsyncStorage.setItem('userId', res.data.id);
       setSnackBarMsg("Login Sucessfull")
     }).catch(err=>{
       setSnackBarMsg("Login Failed")

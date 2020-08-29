@@ -1,4 +1,5 @@
 import  axios  from 'axios'
+import AsyncStorage from '@react-native-community/async-storage'
 
 export const registerData = (FirstName, LastName, Email, Password) => {
 
@@ -27,14 +28,17 @@ export const login = (Email, Password) => {
     )
 }
 
-export const confirmPassword = (ConfirmPassword, NewPassword) =>{
+export const sendEmail = (Email) =>{
     let Data ={
-        confirmPassword: ConfirmPassword,
-        newPassword: NewPassword
+        email: Email
     }
-
+     var token = AsyncStorage.getItem('userId')
     return axios.post(
-        '',
-        Data
+        'http://fundoonotes.incubation.bridgelabz.com/api/user/reset',
+        Data,{
+            headers: {
+                Authorization : token
+            }
+        }
     )
 }
