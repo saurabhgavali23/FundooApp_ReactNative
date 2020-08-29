@@ -108,10 +108,10 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 20,
-    width: '90%',
     backgroundColor: '#fff',
     padding: 15,
     marginLeft: 20,
+    marginRight: 21,
     marginBottom: 10,
     alignItems: 'stretch',
   },
