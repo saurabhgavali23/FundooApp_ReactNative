@@ -26,3 +26,15 @@ export const login = (Email, Password) => {
         Data
     )
 }
+
+export const confirmPassword = (ConfirmPassword, NewPassword) =>{
+    let Data ={
+        confirmPassword: ConfirmPassword,
+        newPassword: NewPassword
+    }
+
+    return axios.post(
+        '',
+        Data
+    )
+}

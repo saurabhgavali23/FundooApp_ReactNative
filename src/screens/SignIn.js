@@ -9,10 +9,11 @@ import {
 } from 'react-native';
 
 import {useHistory} from 'react-router-native';
-import Snackbar from 'react-native-snackbar';
 import { login } from '../services/userService'
+import { setSnackBarMsg } from '../config/config';
 
 const SignIn = () => {
+
   const history = useHistory();
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
@@ -22,15 +23,9 @@ const SignIn = () => {
 
   const handleChange = () => {
     login(Email,Password).then(res=>{
-      Snackbar.show({
-        text: "Login Sucessfull",
-        duration: Snackbar.LENGTH_LONG,
-      })
+      setSnackBarMsg("Login Sucessfull")
     }).catch(err=>{
-      Snackbar.show({
-        text:  "login faild",
-        duration: Snackbar.LENGTH_LONG,
-      })
+      setSnackBarMsg("Login Failed")
     })
   };
 
@@ -95,6 +90,12 @@ const SignIn = () => {
             <Text style={styles.btnText}>SignUp</Text>
           </TouchableOpacity>
         </View>
+        <Text
+        style={styles.linkingUrl}
+        onPress={()=> history.push('/sendemail')}
+        >
+        Forget Password
+        </Text>
       </View>
     </View>
   );
@@ -103,7 +104,8 @@ const SignIn = () => {
 const styles = StyleSheet.create({
   container: {
     marginTop: '50%',
-    backgroundColor: '#fff',
+    alignItems: 'center',
+    backgroundColor: '#F9F9F9',
     justifyContent: 'center',
   },
   input: {
@@ -147,5 +149,13 @@ const styles = StyleSheet.create({
     marginLeft: 18,
     fontSize: 17,
   },
+  linkingUrl: {
+    justifyContent: 'center',
+    color: 'black',
+    textDecorationLine: 'underline',
+    textAlign: 'center',
+    marginTop: 10,
+    fontSize: 20
+  }
 });
 export default SignIn;

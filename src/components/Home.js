@@ -6,7 +6,7 @@ import Header from '../screens/Header';
 
 const Home = () => {
   return (
-    <View style={styles.container}>
+    <View >
       <Header/>
       <SignIn/>
     </View>

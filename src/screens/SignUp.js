@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
 import {View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import { useHistory } from 'react-router-native';
-import Snackbar from 'react-native-snackbar';
 import { registerData } from '../services/userService'
+import { setSnackBarMsg } from '../config/config';
 
 const SignUp = () => {
 
@@ -21,16 +21,10 @@ const SignUp = () => {
 
   registerData(FirstName, LastName, Email, Password)
     .then(res=>{
-      Snackbar.show({
-        text: res.data.data.message,
-        duration: Snackbar.LENGTH_LONG,
-      })
+      setSnackBarMsg(res.data.data.message)
       goToSignIn();
     }).catch(err=>{
-      Snackbar.show({
-        text: "user already exist",
-        duration: Snackbar.LENGTH_LONG,
-      })
+      setSnackBarMsg("user already exist")
     })
   }
 
@@ -156,7 +150,7 @@ const SignUp = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F9F9F9',
     justifyContent: 'center',
   },
   input: {
