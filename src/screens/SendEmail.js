@@ -7,12 +7,10 @@ import {
   TouchableOpacity,
   StatusBar
 } from 'react-native';
-import {useHistory} from 'react-router-native';
 import {sendEmail} from '../services/userService';
 import { setSnackBarMsg } from '../config/config';
 
-const SendEmail = () => {
-  const history = useHistory();
+const SendEmail = ({navigation}) => {
 
   const [Email, setEmail] = useState('');
   const [EmailError, setEmailError] = useState('');
@@ -65,7 +63,7 @@ const SendEmail = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.userButton}
-          onPress={() => history.push('/signin')}>
+          onPress={() => navigation.navigate('signin')}>
           <Text style={styles.btnText}>SignIn</Text>
         </TouchableOpacity>
       </View>

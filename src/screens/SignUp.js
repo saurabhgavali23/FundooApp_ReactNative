@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-native';
 import { registerData } from '../services/userService'
 import { setSnackBarMsg } from '../config/config';
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
 
   const history = useHistory();
   const [FirstName, setFirstName] = useState('')
@@ -29,9 +29,7 @@ const SignUp = () => {
   }
 
   const goToSignIn = () =>{
-    history.push({
-        pathname: '\signin'
-    })
+    navigation.navigate('signin')
   }
 
   const emailValidation = () =>{

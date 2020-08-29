@@ -12,7 +12,7 @@ import {useHistory} from 'react-router-native';
 import { login } from '../services/userService'
 import { setSnackBarMsg } from '../config/config';
 
-const SignIn = () => {
+const SignIn = ({navigation}) => {
 
   const history = useHistory();
   const [Email, setEmail] = useState('');
@@ -31,9 +31,7 @@ const SignIn = () => {
   };
 
   const goToSignUp = () => {
-    history.push({
-      pathname: 'signup',
-    });
+    navigation.navigate('signup')
   };
 
   const emailValidation = () => {
@@ -93,7 +91,7 @@ const SignIn = () => {
         </View>
         <Text
         style={styles.linkingUrl}
-        onPress={()=> history.push('/sendemail')}
+        onPress={()=> navigation.navigate('sendemail')}
         >
         Forget Password
         </Text>
@@ -104,7 +102,7 @@ const SignIn = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: '50%',
+    flex: 1,
     alignItems: 'center',
     backgroundColor: '#F9F9F9',
     justifyContent: 'center',
