@@ -6,13 +6,17 @@ import SignUp from '../screens/SignUp';
 import ResetPassword from '../screens/ResetPassword';
 import SendEmail from '../screens/SendEmail';
 import DashBoard from '../components/DashBoard';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const stack = createStackNavigator();
 
 const AppNavigation = () => {
+
+const mainPage = AsyncStorage.getItem('userId') ? 'dashboard': 'signin';
+
   return (
     <NavigationContainer>
-      <stack.Navigator>
+      <stack.Navigator initialRouteName={mainPage}>
         <stack.Screen options={{headerShown: false}} name="signin" component={SignIn}/>
         <stack.Screen options={{headerShown: false}} name="signup" component={SignUp}/>
         <stack.Screen options={{headerShown: false}} name="resetpass" component={ResetPassword}/>
