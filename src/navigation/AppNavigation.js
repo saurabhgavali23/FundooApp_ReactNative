@@ -17,7 +17,7 @@ const Drawer = createDrawerNavigator();
 
 const AppNavigation = () => {  
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const authContext = useMemo(() => {
     return{
@@ -31,17 +31,17 @@ const AppNavigation = () => {
     <AuthContext.Provider value={authContext}>
     <NavigationContainer>
       {isAuthenticated ? (
-        <Drawer.Navigator initialRouteName='dashboard'>
-        <Drawer.Screen name="dashboard" component={DashBoardScreen}/>
+        <Drawer.Navigator initialRouteName='dashBoard'>
+        <Drawer.Screen name="dashBoard" component={DashBoardScreen}/>
         <Drawer.Screen name="note" component={Notes}/>
         <Drawer.Screen name="reminder" component={Reminder}/>
       </Drawer.Navigator>
       ):(
-      <stack.Navigator initialRouteName='signin'>
-        <stack.Screen options={{headerShown: false}} name="signin" component={SignIn}/>
-        <stack.Screen options={{headerShown: false}} name="signup" component={SignUp}/>
-        <stack.Screen options={{headerShown: false}} name="resetpassword" component={ResetPassword}/>
-        <stack.Screen options={{headerShown: false}} name="sendemail" component={SendEmail}/>
+      <stack.Navigator initialRouteName='signIn'>
+        <stack.Screen options={{headerShown: false}} name="signIn" component={SignIn}/>
+        <stack.Screen options={{headerShown: false}} name="signUp" component={SignUp}/>
+        <stack.Screen options={{headerShown: false}} name="resetPassword" component={ResetPassword}/>
+        <stack.Screen options={{headerShown: false}} name="sendEmail" component={SendEmail}/>
       </stack.Navigator>
       )}
     </NavigationContainer>

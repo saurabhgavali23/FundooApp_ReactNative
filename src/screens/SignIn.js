@@ -1,102 +1,89 @@
-import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StatusBar,
-} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage'
-import { login } from '../services/userService'
-import { setSnackBarMsg } from '../config/config';
-import styles from '../styles/SignInCss'
+import React, {Fragment, useState} from 'react';
+import {View, StatusBar} from 'react-native';
+import {Input, Button, Text} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-community/async-storage';
+import {setSnackBarMsg} from '../config/config';
+import {login} from '../services/userService';
+import styles from '../styles/SignInCss';
 
-const SignIn = ({navigation}) => {
-
+export const SignIn = ({navigation}) => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
-  const [EmailError, setEmailError] = useState('');
-  const [PasswordError, setPasswordError] = useState('');
-  const [isValid, setisValid] = useState(true);
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidPassword, setIsValidPassword] = useState(true);
 
   const handleChange = () => {
-    login(Email,Password).then(res=>{
-      AsyncStorage.setItem('userId', res.data.id);
-      setSnackBarMsg("Login Sucessfull")
-      navigation.navigate('dashboard')
-    }).catch(err=>{
-      setSnackBarMsg("Login Failed")
-    })
-  };
-
-  const goToSignUp = () => {
-    navigation.navigate('signup')
+    login(Email, Password)
+      .then((res) => {
+        AsyncStorage.setItem('userId', res.data.id);
+        setSnackBarMsg('Login Sucessfull');
+        navigation.navigate('dashboard');
+      })
+      .catch((err) => {
+        setSnackBarMsg('Login Failed');
+      });
   };
 
   const emailValidation = () => {
     var emailReg = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
     if (!emailReg.test(Email)) {
-      setEmailError('Invalid Email');
-      setisValid(false);
+      setIsValidEmail(false);
     } else {
-      setEmailError('');
-      setisValid(true);
+      setIsValidEmail(true);
     }
   };
 
   const passwordValidation = () => {
     var passReg = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$/;
     if (!passReg.test(Password)) {
-      setPasswordError('Invalid Password');
-      setisValid(false);
+      setIsValidPassword(false);
     } else {
-      setPasswordError(null);
-      setisValid(true);
+      setIsValidPassword(true);
     }
   };
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="blue" barStyle="light-content" />
-      <Text style={styles.text}>SignIn</Text>
-      <View>
-        <TextInput
-          style={styles.input}
+      <Fragment>
+        <StatusBar backgroundColor="blue" barStyle="light-content" />
+        <Text style={styles.text}>SignIn</Text>
+        <Input
+          errorStyle={styles.error}
+          errorMessage={isValidEmail ? null : 'Invalid Email'}
+          inputContainerStyle={styles.input}
           placeholder="Email"
           onChangeText={(value) => setEmail(value)}
           onBlur={emailValidation}
-          value={Email}
+          leftIcon={<Icon name="envelope" size={24} color="black" />}
         />
-        {isValid === false ? <Text style={styles.errorText}>{EmailError}</Text> : null}
-        <TextInput
-          style={styles.input}
+        <Input
+          errorStyle={styles.error}
+          errorMessage={isValidPassword ? null : 'Invalid Password'}
+          inputContainerStyle={styles.input}
           placeholder="Password"
-          secureTextEntry={true}
           onChangeText={(value) => setPassword(value)}
           onBlur={passwordValidation}
-          value={Password}
+          leftIcon={<Icon name="lock" size={30} color="black" />}
+          secureTextEntry
         />
-        {isValid === false ? <Text style={styles.errorText}>{PasswordError}</Text> : null}
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.userButton}
-            onPress={handleChange}
-            disabled={!isValid}>
-            <Text style={styles.btnText}>Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.userButton} onPress={goToSignUp}>
-            <Text style={styles.btnText}>SignUp</Text>
-          </TouchableOpacity>
-        </View>
+        <Button
+          containerStyle={styles.button}
+          title="Login"
+          onPress={() => handleChange()}
+        />
+        <Button
+          containerStyle={styles.button}
+          title="SignUp"
+          onPress={() => navigation.navigate('signUp')}
+        />
         <Text
-        style={styles.linkingUrl}
-        onPress={()=> navigation.navigate('sendemail')}
-        >
-        Forget Password
+          style={styles.linkingUrl}
+          onPress={() => navigation.navigate('sendEmail')}>
+          Forget Password
         </Text>
-      </View>
+      </Fragment>
     </View>
   );
 };
-
 export default SignIn;

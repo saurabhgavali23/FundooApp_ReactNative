@@ -1,91 +1,73 @@
-import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StatusBar
-} from 'react-native';
-import {useHistory} from 'react-router-native';
+import React, {Fragment, useState} from 'react';
+import {View, StatusBar} from 'react-native';
+import {Input, Button, Text} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import styles from '../styles/ResetPasswordCss';
 
-const ResetPassword = () => {
-  const history = useHistory();
-
+export const ResetPassword = ({navigation}) => {
   const [ConfirmPassword, setConfirmPassword] = useState('');
+  const [isValidConfrPassword, setIsValidConfrPassword] = useState(true);
   const [NewPassword, setNewPassword] = useState('');
+  const [isValidNewPassword, setIsValidNewPassword] = useState(true);
 
   const handleChange = () => {
     console.log(ConfirmPassword, NewPassword);
   };
 
+  const confrPasswordValidation = () => {
+    var passReg = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$/;
+    if (!passReg.test(ConfirmPassword)) {
+      setIsValidConfrPassword(false);
+    } else {
+      setIsValidConfrPassword(true);
+    }
+  };
+
+  const newPasswordValidation = () => {
+    if (!ConfirmPassword === NewPassword) {
+      setIsValidNewPassword(false);
+    } else {
+      setIsValidNewPassword(true);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="blue" barStyle="light-content" />
-      <Text style={styles.text}>Reset Password</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm password"
-        onChangeText={(value) => setConfirmPassword(value)}
-        value={ConfirmPassword}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="New password"
-        onChangeText={(value) => setNewPassword(value)}
-        value={NewPassword}
-      />
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.userButton} onPress={handleChange}>
-          <Text style={styles.btnText}>Reset Password</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.userButton}
-          onPress={() => history.push('/signin')}>
-          <Text style={styles.btnText}>SignIn</Text>
-        </TouchableOpacity>
-      </View>
+      <Fragment>
+        <StatusBar backgroundColor="blue" barStyle="light-content" />
+        <Text style={styles.text}>Reset Password</Text>
+        <Input
+          errorStyle={styles.error}
+          errorMessage={isValidConfrPassword ? null : 'Invalid Password'}
+          inputContainerStyle={styles.input}
+          placeholder="Confirm Password"
+          onChangeText={(value) => setConfirmPassword(value)}
+          onBlur={confrPasswordValidation}
+          leftIcon={<Icon name="lock" size={30} color="black" />}
+          secureTextEntry
+        />
+        <Input
+          errorStyle={styles.error}
+          errorMessage={isValidNewPassword ? null : 'Invalid New Password'}
+          inputContainerStyle={styles.input}
+          placeholder="New Password"
+          onChangeText={(value) => setNewPassword(value)}
+          onBlur={newPasswordValidation}
+          leftIcon={<Icon name="lock" size={30} color="black" />}
+          secureTextEntry
+        />
+        <Button
+          containerStyle={styles.button}
+          title="Submit"
+          onPress={() => handleChange()}
+        />
+        <Button
+          containerStyle={styles.button}
+          title="SignIn"
+          onPress={() => navigation.navigate('signIn')}
+        />
+      </Fragment>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F9F9F9',
-  },
-  input: {
-    width: '85%',
-    backgroundColor: '#fff',
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  text: {
-    fontSize: 25,
-    marginBottom: 10,
-  },
-  userButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFD700',
-    padding: 15,
-    marginLeft: 10,
-    marginRight: 20,
-    width: '43%',
-  },
-
-  btnText: {
-    fontSize: 20,
-    justifyContent: 'center',
-    textAlign: 'center',
-  },
-
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '90%',
-  },
-});
 export default ResetPassword;
