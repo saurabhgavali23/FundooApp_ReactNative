@@ -8,16 +8,19 @@ import ResetPassword from '../screens/ResetPassword';
 import SendEmail from '../screens/SendEmail';
 import DashBoard from '../components/DashBoard';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Notes from '../screens/Notes';
+import NoteIcon from 'react-native-vector-icons/Entypo';
+import ReminderIocn from 'react-native-vector-icons/FontAwesome';
 import Reminder from '../screens/Reminder';
 import { AuthContext } from '../config/config';
+import { Text } from 'react-native';
+import CreateNewLable from '../screens/CreateNewLable';
 
 const stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const AppNavigation = () => {  
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
 
   const authContext = useMemo(() => {
     return{
@@ -32,9 +35,25 @@ const AppNavigation = () => {
     <NavigationContainer>
       {isAuthenticated ? (
         <Drawer.Navigator initialRouteName='dashBoard'>
-        <Drawer.Screen name="dashBoard" component={DashBoardScreen}/>
-        <Drawer.Screen name="note" component={Notes}/>
-        <Drawer.Screen name="reminder" component={Reminder}/>
+        <Drawer.Screen name="dashBoard" component={DashBoardScreen} 
+        options={{
+          drawerLabel: () =>( <Text style={{fontSize: 18, textAlign:'left'}}>Notes</Text>),
+          drawerIcon: () => (
+            <NoteIcon name="light-bulb" size={18}/>
+          ),
+          }}/>
+        <Drawer.Screen name="reminder" component={Reminder} options={{
+          drawerLabel: () =>( <Text style={{fontSize: 18, textAlign:'left'}}>Reminder</Text>),
+          drawerIcon: () => (
+            <ReminderIocn name="bell-o" size={18}/>
+          ),
+        }}/>
+        <Drawer.Screen name="createNewLable" component={CreateNewLable} options={{
+          drawerLabel: () =>( <Text style={{fontSize: 18, textAlign:'left'}}>Create New Lable</Text>),
+          drawerIcon: () => (
+            <NoteIcon name="plus" size={20}/>
+          ),
+        }}/>
       </Drawer.Navigator>
       ):(
       <stack.Navigator initialRouteName='signIn'>
@@ -54,12 +73,7 @@ const DashBoardScreen = ({navigation}) => {
     <stack.Navigator screenOptions={{
       headerStyle:{
         backgroundColor: '#009387',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle:{
-        fontWeight: 'bold',
-        textAlign: 'justify'
-      },
+      }
     }}>
     
     <stack.Screen name="dashboard" component={DashBoard} options={{

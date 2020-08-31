@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native';
 
-const Notes = () => {
+const CreateNewLable = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Create Note</Text>
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Notes;
+export default CreateNewLable;
