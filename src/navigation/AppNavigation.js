@@ -62,12 +62,17 @@ const DashBoardScreen = ({navigation}) => {
     }}>
     
     <stack.Screen name="dashboard" component={DashBoard} options={{
-          title: "Dashboard",
+          headerTitle: false,
           headerLeft: () => (
-            <Icon.Button name='ios-menu' size={25} 
+            <Icon.Button name='ios-menu' size={30} 
               backgroundColor='#009387' onPress={() => navigation.openDrawer()}
             />
           ),
+          headerRight: () => (
+            <Icon.Button name="person-circle-outline" size={30}
+              backgroundColor="#009387"
+            />
+          )
         }} />
     </stack.Navigator>
   )
