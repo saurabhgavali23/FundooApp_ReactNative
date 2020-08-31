@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
-import {View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, StatusBar} from 'react-native';
 import { registerData } from '../services/userService'
 import { setSnackBarMsg } from '../config/config';
+import styles from '../styles/SignUpCss'
 
 const SignUp = ({navigation}) => {
 
@@ -142,55 +143,4 @@ const SignUp = ({navigation}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F9F9F9',
-    justifyContent: 'center',
-  },
-  input: {
-    fontSize: 20,
-    width: '90%',
-    backgroundColor: '#fff',
-    borderRadius: 4,
-    padding: 15,
-    marginLeft: 20,
-    marginBottom: 10,
-    alignItems: 'stretch'
-  },
-
-  text: {
-    fontSize: 30,
-    textAlign: 'center',
-    marginBottom: 10
-  },
-
-  userButton:{
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFD700',
-    padding: 15,
-    marginLeft: 20,
-    marginRight: 22,
-    width: "44%"
-  },
-  
-  btnText: {
-    fontSize: 20,
-    justifyContent: 'center'
-  },
-
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '90%'
-  },
-
-  errorText:{
-      color: 'red',
-      marginLeft: 18,
-      fontSize: 17
-  }
-});
 export default SignUp;

@@ -40,7 +40,7 @@ const AppNavigation = () => {
       <stack.Navigator initialRouteName='signin'>
         <stack.Screen options={{headerShown: false}} name="signin" component={SignIn}/>
         <stack.Screen options={{headerShown: false}} name="signup" component={SignUp}/>
-        <stack.Screen options={{headerShown: false}} name="resetpass" component={ResetPassword}/>
+        <stack.Screen options={{headerShown: false}} name="resetpassword" component={ResetPassword}/>
         <stack.Screen options={{headerShown: false}} name="sendemail" component={SendEmail}/>
       </stack.Navigator>
       )}
@@ -48,6 +48,7 @@ const AppNavigation = () => {
     </AuthContext.Provider>
   );
 };
+
 const DashBoardScreen = ({navigation}) => {
   return(
     <stack.Navigator screenOptions={{
@@ -70,12 +71,11 @@ const DashBoardScreen = ({navigation}) => {
           ),
           headerRight: () => (
             <Icon.Button name="person-circle-outline" size={30}
-              backgroundColor="#009387"
+              backgroundColor="#009387" onPress={() => Profile()}
             />
           )
         }} />
     </stack.Navigator>
   )
 }
-
 export default AppNavigation;
