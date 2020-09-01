@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { SearchBar, normalize } from 'react-native-elements'
+import { SearchBar} from 'react-native-elements'
 
 export const SearchNotes = () => {
     return (

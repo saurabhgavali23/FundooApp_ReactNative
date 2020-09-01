@@ -7,15 +7,13 @@ import SignUp from '../screens/SignUp';
 import ResetPassword from '../screens/ResetPassword';
 import SendEmail from '../screens/SendEmail';
 import DashBoard from '../components/DashBoard';
-import Icon from 'react-native-vector-icons/Ionicons';
 import NoteIcon from 'react-native-vector-icons/Entypo';
 import ReminderIocn from 'react-native-vector-icons/FontAwesome';
 import Reminder from '../screens/Reminder';
 import {AuthContext} from '../config/config';
 import {Text} from 'react-native';
 import CreateNewLable from '../screens/CreateNewLable';
-import {Header} from 'react-native-elements';
-import SearchNotes from '../screens/SearchNotes';
+
 
 const stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -38,7 +36,7 @@ const AppNavigation = () => {
           <Drawer.Navigator initialRouteName="dashBoard">
             <Drawer.Screen
               name="dashBoard"
-              component={DashBoardScreen}
+              component={DashBoard}
               options={{
                 drawerLabel: () => (
                   <Text style={{fontSize: 18, textAlign: 'left'}}>Notes</Text>
@@ -67,7 +65,7 @@ const AppNavigation = () => {
                     Create New Lable
                   </Text>
                 ),
-                drawerIcon: () => <NoteIcon name="plus" size={20} />,
+                drawerIcon: () => <NoteIcon name="plus" size={20} />
               }}
             />
           </Drawer.Navigator>
@@ -97,36 +95,6 @@ const AppNavigation = () => {
         )}
       </NavigationContainer>
     </AuthContext.Provider>
-  );
-};
-
-const DashBoardScreen = ({navigation}) => {
-
-  return (
-    <stack.Navigator
-      screenOptions={{
-        header: () => (
-          <Header
-            leftComponent={
-              <Icon
-                name="ios-menu"
-                size={30}
-                onPress={() => navigation.openDrawer()}
-              />
-            }
-            centerComponent={<SearchNotes />}
-            rightComponent={
-              <Icon
-                name="person-circle-outline"
-                size={30}
-                onPress={() => navigation.navigate()}
-              />
-            }
-          />
-        ),
-      }}>
-      <stack.Screen name="dashboard" component={DashBoard} />
-    </stack.Navigator>
   );
 };
 export default AppNavigation;

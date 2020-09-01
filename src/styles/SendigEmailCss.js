@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 25,
     fontWeight: 'bold',
+    letterSpacing: 1
   },
   error: {
     fontSize: 15,
