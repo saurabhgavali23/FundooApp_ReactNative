@@ -19,7 +19,7 @@ const stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const AppNavigation = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const authContext = useMemo(() => {
     return {
