@@ -1,7 +1,7 @@
-import React,{useState, useMemo, useContext} from 'react';
+import React, {useState, useMemo} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {createDrawerNavigator} from '@react-navigation/drawer'
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import SignIn from '../screens/SignIn';
 import SignUp from '../screens/SignUp';
 import ResetPassword from '../screens/ResetPassword';
@@ -11,85 +11,122 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import NoteIcon from 'react-native-vector-icons/Entypo';
 import ReminderIocn from 'react-native-vector-icons/FontAwesome';
 import Reminder from '../screens/Reminder';
-import { AuthContext } from '../config/config';
-import { Text } from 'react-native';
+import {AuthContext} from '../config/config';
+import {Text} from 'react-native';
 import CreateNewLable from '../screens/CreateNewLable';
+import {Header} from 'react-native-elements';
+import SearchNotes from '../screens/SearchNotes';
 
 const stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-const AppNavigation = () => {  
-
-  const [isAuthenticated, setIsAuthenticated] = useState(true)
+const AppNavigation = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const authContext = useMemo(() => {
-    return{
+    return {
       signOut: () => {
-        setIsAuthenticated(false)
-      }
-    }
-  }, [])
+        setIsAuthenticated(false);
+      },
+    };
+  }, []);
 
   return (
     <AuthContext.Provider value={authContext}>
-    <NavigationContainer>
-      {isAuthenticated ? (
-        <Drawer.Navigator initialRouteName='dashBoard'>
-        <Drawer.Screen name="dashBoard" component={DashBoardScreen} 
-        options={{
-          drawerLabel: () =>( <Text style={{fontSize: 18, textAlign:'left'}}>Notes</Text>),
-          drawerIcon: () => (
-            <NoteIcon name="light-bulb" size={18}/>
-          ),
-          }}/>
-        <Drawer.Screen name="reminder" component={Reminder} options={{
-          drawerLabel: () =>( <Text style={{fontSize: 18, textAlign:'left'}}>Reminder</Text>),
-          drawerIcon: () => (
-            <ReminderIocn name="bell-o" size={18}/>
-          ),
-        }}/>
-        <Drawer.Screen name="createNewLable" component={CreateNewLable} options={{
-          drawerLabel: () =>( <Text style={{fontSize: 18, textAlign:'left'}}>Create New Lable</Text>),
-          drawerIcon: () => (
-            <NoteIcon name="plus" size={20}/>
-          ),
-        }}/>
-      </Drawer.Navigator>
-      ):(
-      <stack.Navigator initialRouteName='signIn'>
-        <stack.Screen options={{headerShown: false}} name="signIn" component={SignIn}/>
-        <stack.Screen options={{headerShown: false}} name="signUp" component={SignUp}/>
-        <stack.Screen options={{headerShown: false}} name="resetPassword" component={ResetPassword}/>
-        <stack.Screen options={{headerShown: false}} name="sendEmail" component={SendEmail}/>
-      </stack.Navigator>
-      )}
-    </NavigationContainer>
+      <NavigationContainer>
+        {isAuthenticated ? (
+          <Drawer.Navigator initialRouteName="dashBoard">
+            <Drawer.Screen
+              name="dashBoard"
+              component={DashBoardScreen}
+              options={{
+                drawerLabel: () => (
+                  <Text style={{fontSize: 18, textAlign: 'left'}}>Notes</Text>
+                ),
+                drawerIcon: () => <NoteIcon name="light-bulb" size={18} />,
+              }}
+            />
+            <Drawer.Screen
+              name="reminder"
+              component={Reminder}
+              options={{
+                drawerLabel: () => (
+                  <Text style={{fontSize: 18, textAlign: 'left'}}>
+                    Reminder
+                  </Text>
+                ),
+                drawerIcon: () => <ReminderIocn name="bell-o" size={18} />,
+              }}
+            />
+            <Drawer.Screen
+              name="createNewLable"
+              component={CreateNewLable}
+              options={{
+                drawerLabel: () => (
+                  <Text style={{fontSize: 18, textAlign: 'left'}}>
+                    Create New Lable
+                  </Text>
+                ),
+                drawerIcon: () => <NoteIcon name="plus" size={20} />,
+              }}
+            />
+          </Drawer.Navigator>
+        ) : (
+          <stack.Navigator initialRouteName="signIn">
+            <stack.Screen
+              options={{headerShown: false}}
+              name="signIn"
+              component={SignIn}
+            />
+            <stack.Screen
+              options={{headerShown: false}}
+              name="signUp"
+              component={SignUp}
+            />
+            <stack.Screen
+              options={{headerShown: false}}
+              name="resetPassword"
+              component={ResetPassword}
+            />
+            <stack.Screen
+              options={{headerShown: false}}
+              name="sendEmail"
+              component={SendEmail}
+            />
+          </stack.Navigator>
+        )}
+      </NavigationContainer>
     </AuthContext.Provider>
   );
 };
 
 const DashBoardScreen = ({navigation}) => {
-  return(
-    <stack.Navigator screenOptions={{
-      headerStyle:{
-        backgroundColor: '#009387',
-      }
-    }}>
-    
-    <stack.Screen name="dashboard" component={DashBoard} options={{
-          headerTitle: false,
-          headerLeft: () => (
-            <Icon.Button name='ios-menu' size={30} 
-              backgroundColor='#009387' onPress={() => navigation.openDrawer()}
-            />
-          ),
-          headerRight: () => (
-            <Icon.Button name="person-circle-outline" size={30}
-              backgroundColor="#009387" onPress={() => Profile()}
-            />
-          )
-        }} />
+
+  return (
+    <stack.Navigator
+      screenOptions={{
+        header: () => (
+          <Header
+            leftComponent={
+              <Icon
+                name="ios-menu"
+                size={30}
+                onPress={() => navigation.openDrawer()}
+              />
+            }
+            centerComponent={<SearchNotes />}
+            rightComponent={
+              <Icon
+                name="person-circle-outline"
+                size={30}
+                onPress={() => navigation.navigate()}
+              />
+            }
+          />
+        ),
+      }}>
+      <stack.Screen name="dashboard" component={DashBoard} />
     </stack.Navigator>
-  )
-}
+  );
+};
 export default AppNavigation;
