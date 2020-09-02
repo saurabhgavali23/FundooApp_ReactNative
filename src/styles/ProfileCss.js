@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     avatar: {
-      backgroundColor: 'red',
+      backgroundColor: '#007aff',
     },
     avatarContainer: {
         padding: '5%',
@@ -13,8 +13,10 @@ const styles = StyleSheet.create({
     },
     name:{
         fontSize: 20,
-        marginLeft: '10%',
-        flexDirection: 'column'
+        fontStyle: 'normal'
+    },
+    emails:{
+        fontSize: 17,
     }
   });
   export default styles

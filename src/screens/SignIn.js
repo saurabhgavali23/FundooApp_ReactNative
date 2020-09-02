@@ -16,9 +16,9 @@ export const SignIn = ({navigation}) => {
   const handleChange = () => {
     login(Email, Password)
       .then((res) => {
-        AsyncStorage.setItem('userId', res.data.id);
+        AsyncStorage.setItem('userData', JSON.stringify(res.data));
         setSnackBarMsg('Login Sucessfull');
-        navigation.navigate('dashboard');
+        navigation.navigate('drawer');
       })
       .catch((err) => {
         setSnackBarMsg('Login Failed');

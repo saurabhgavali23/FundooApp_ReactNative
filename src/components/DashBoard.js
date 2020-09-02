@@ -11,7 +11,7 @@ const DashBoard = ({navigation}) => {
   const refRBSheet = useRef();
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <View>
         <Header
           leftComponent={
             <Icon
