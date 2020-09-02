@@ -17,6 +17,16 @@ const styles = StyleSheet.create({
     },
     emails:{
         fontSize: 17,
+    },
+    logout:{
+        flex: 1,
+        width: '17%',
+        height: '5%',
+        flexDirection: 'column',
+        alignSelf: 'flex-end',
+        justifyContent: 'flex-end',
+        marginRight: '5%',
+        marginBottom: '5%'
     }
   });
   export default styles

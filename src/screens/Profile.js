@@ -3,6 +3,7 @@ import {View, Text} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import styles from '../styles/ProfileCss';
 import AsyncStorage from '@react-native-community/async-storage';
+import Logout from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Profile = () => {
   const [firstName, setFirstName] = useState('firstname');
@@ -33,6 +34,9 @@ const Profile = () => {
           </Text>
           <Text style={styles.emails}>{email}</Text>
         </View>
+      </View>
+      <View style={styles.logout}>
+        <Logout.Button name="logout" size={35} />
       </View>
     </View>
   );
