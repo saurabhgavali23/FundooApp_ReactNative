@@ -1,11 +1,6 @@
 import React, {useState, useMemo} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import SignIn from '../screens/SignIn';
-import SignUp from '../screens/SignUp';
-import ResetPassword from '../screens/ResetPassword';
-import SendEmail from '../screens/SendEmail';
 import DashBoard from '../components/DashBoard';
 import NoteIcon from 'react-native-vector-icons/Entypo';
 import ReminderIocn from 'react-native-vector-icons/FontAwesome';
@@ -13,13 +8,12 @@ import Reminder from '../screens/Reminder';
 import {AuthContext} from '../config/config';
 import {Text} from 'react-native';
 import CreateNewLable from '../screens/CreateNewLable';
+import StackNavigation from './StackNavigation';
 
-
-const stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const AppNavigation = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const authContext = useMemo(() => {
     return {
@@ -70,28 +64,7 @@ const AppNavigation = () => {
             />
           </Drawer.Navigator>
         ) : (
-          <stack.Navigator initialRouteName="signIn">
-            <stack.Screen
-              options={{headerShown: false}}
-              name="signIn"
-              component={SignIn}
-            />
-            <stack.Screen
-              options={{headerShown: false}}
-              name="signUp"
-              component={SignUp}
-            />
-            <stack.Screen
-              options={{headerShown: false}}
-              name="resetPassword"
-              component={ResetPassword}
-            />
-            <stack.Screen
-              options={{headerShown: false}}
-              name="sendEmail"
-              component={SendEmail}
-            />
-          </stack.Navigator>
+          <StackNavigation/>
         )}
       </NavigationContainer>
     </AuthContext.Provider>
