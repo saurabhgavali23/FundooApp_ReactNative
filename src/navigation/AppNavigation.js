@@ -1,16 +1,15 @@
 import React, {useState, useMemo} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import DashBoard from '../components/DashBoard';
-import NoteIcon from 'react-native-vector-icons/Entypo';
-import ReminderIocn from 'react-native-vector-icons/FontAwesome';
-import Reminder from '../screens/Reminder';
 import {AuthContext} from '../config/config';
-import {Text} from 'react-native';
-import CreateNewLable from '../screens/CreateNewLable';
-import StackNavigation from './StackNavigation';
+import {createStackNavigator} from '@react-navigation/stack';
+import SignIn from '../screens/SignIn';
+import SignUp from '../screens/SignUp';
+import ResetPassword from '../screens/ResetPassword';
+import SendEmail from '../screens/SendEmail';
+import CreateNote from '../screens/CreateNote';
+import DrawerNavigation from './DrawerNavigation';
 
-const Drawer = createDrawerNavigator();
+const stack = createStackNavigator();
 
 const AppNavigation = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
@@ -23,49 +22,20 @@ const AppNavigation = () => {
     };
   }, []);
 
+  var mainPage = isAuthenticated? 'drawer' : 'signIn'
+
+
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        {isAuthenticated ? (
-          <Drawer.Navigator initialRouteName="dashBoard">
-            <Drawer.Screen
-              name="dashBoard"
-              component={DashBoard}
-              options={{
-                drawerLabel: () => (
-                  <Text style={{fontSize: 18, textAlign: 'left'}}>Notes</Text>
-                ),
-                drawerIcon: () => <NoteIcon name="light-bulb" size={18} />,
-              }}
-            />
-            <Drawer.Screen
-              name="reminder"
-              component={Reminder}
-              options={{
-                drawerLabel: () => (
-                  <Text style={{fontSize: 18, textAlign: 'left'}}>
-                    Reminder
-                  </Text>
-                ),
-                drawerIcon: () => <ReminderIocn name="bell-o" size={18} />,
-              }}
-            />
-            <Drawer.Screen
-              name="createNewLable"
-              component={CreateNewLable}
-              options={{
-                drawerLabel: () => (
-                  <Text style={{fontSize: 18, textAlign: 'left'}}>
-                    Create New Lable
-                  </Text>
-                ),
-                drawerIcon: () => <NoteIcon name="plus" size={20} />
-              }}
-            />
-          </Drawer.Navigator>
-        ) : (
-          <StackNavigation/>
-        )}
+          <stack.Navigator initialRouteName={mainPage} headerMode="none">
+            <stack.Screen name="signIn" component={SignIn} />
+            <stack.Screen name="signUp" component={SignUp} />
+            <stack.Screen name="resetPassword" component={ResetPassword} />
+            <stack.Screen name="sendEmail" component={SendEmail} />
+            <stack.Screen name="drawer" component={DrawerNavigation} />
+            <stack.Screen name="createNote" component={CreateNote} />
+          </stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
   );

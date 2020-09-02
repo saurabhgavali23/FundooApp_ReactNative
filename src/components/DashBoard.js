@@ -4,13 +4,12 @@ import {Header} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NoteIcon from 'react-native-vector-icons/AntDesign';
 import SearchNotes from '../screens/SearchNotes';
-import CreateNote from '../screens/CreateNote';
 
 const DashBoard = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.plusicon}>
-        <NoteIcon name="pluscircle" size={60} onPress={() => CreateNote()} />
+        <NoteIcon name="pluscircle" size={60} onPress={() => navigation.navigate('createNote')} />
       </View>
       <View style={styles.header}>
         <Header
@@ -26,7 +25,7 @@ const DashBoard = ({navigation}) => {
             <Icon
               name="person-circle-outline"
               size={30}
-              onPress={() => navigation.navigate()}
+              onPress={() => navigation.navigate('reminder')}
             />
           }
         />
