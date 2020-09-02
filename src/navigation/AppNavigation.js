@@ -24,17 +24,16 @@ const AppNavigation = () => {
 
   var mainPage = isAuthenticated? 'drawer' : 'signIn'
 
-
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-          <stack.Navigator initialRouteName={mainPage} headerMode="none">
-            <stack.Screen name="signIn" component={SignIn} />
-            <stack.Screen name="signUp" component={SignUp} />
-            <stack.Screen name="resetPassword" component={ResetPassword} />
-            <stack.Screen name="sendEmail" component={SendEmail} />
-            <stack.Screen name="drawer" component={DrawerNavigation} />
-            <stack.Screen name="createNote" component={CreateNote} />
+          <stack.Navigator initialRouteName={mainPage} >
+            <stack.Screen options={{headerShown: false}} name="signIn" component={SignIn} />
+            <stack.Screen options={{headerShown: false}} name="signUp" component={SignUp} />
+            <stack.Screen options={{headerShown: false}} name="resetPassword" component={ResetPassword} />
+            <stack.Screen options={{headerShown: false}} name="sendEmail" component={SendEmail} />
+            <stack.Screen options={{headerShown: false}} name="drawer" component={DrawerNavigation} />
+            <stack.Screen name="createNote" component={CreateNote} options={{headerTitle:'Dashboard'}} />
           </stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
