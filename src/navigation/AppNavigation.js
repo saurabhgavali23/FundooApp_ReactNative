@@ -8,6 +8,7 @@ import ResetPassword from '../screens/ResetPassword';
 import SendEmail from '../screens/SendEmail';
 import CreateNote from '../screens/CreateNote';
 import DrawerNavigation from './DrawerNavigation';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const stack = createStackNavigator();
 
@@ -21,7 +22,7 @@ const AppNavigation = () => {
       },
     };
   }, []);
-
+  
   var mainPage = isAuthenticated? 'drawer' : 'signIn'
 
   return (
