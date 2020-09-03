@@ -5,7 +5,10 @@ import styles from '../styles/ProfileCss';
 import AsyncStorage from '@react-native-community/async-storage';
 import Logout from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Profile = () => {
+import { logout } from '../config/config'
+
+const Profile = ({navigation}) => {
+
   const [firstName, setFirstName] = useState('firstname');
   const [lastName, setLastName] = useState('lastname');
   const [email, setEmail] = useState('@email');
@@ -17,6 +20,13 @@ const Profile = () => {
     });
   } catch {
     console.warn('Somthing Went Wrong');
+  }
+
+  const handleLogout = async () =>{
+    logout().then((res)=>{
+      if(res)
+        navigation.navigate('signIn')
+    }) 
   }
   return (
     <View style={styles.container}>
@@ -36,7 +46,9 @@ const Profile = () => {
         </View>
       </View>
       <View style={styles.logout}>
-        <Logout.Button name="logout" size={35} />
+        <Logout.Button name="logout" size={35}
+          onPress={()=> handleLogout()}
+        />
       </View>
     </View>
   );

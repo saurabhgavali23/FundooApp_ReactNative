@@ -66,7 +66,7 @@ const DashBoard = ({navigation}) => {
           }}
           height={300}
           >
-            <Profile/>
+            <Profile navigation={navigation}/>
           </RBSheet>
       </View>
     </View>

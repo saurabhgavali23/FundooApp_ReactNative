@@ -1,6 +1,5 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {AuthContext} from '../config/config';
 import {createStackNavigator} from '@react-navigation/stack';
 import SignIn from '../screens/SignIn';
 import SignUp from '../screens/SignUp';
@@ -8,36 +7,30 @@ import ResetPassword from '../screens/ResetPassword';
 import SendEmail from '../screens/SendEmail';
 import CreateNote from '../screens/CreateNote';
 import DrawerNavigation from './DrawerNavigation';
-import AsyncStorage from '@react-native-community/async-storage';
+import { isLoggedIn} from '../config/config';
+import { View, ActivityIndicator } from 'react-native';
 
 const stack = createStackNavigator();
 
 const AppNavigation = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
-  const authContext = useMemo(() => {
-    return {
-      signOut: () => {
-        setIsAuthenticated(false);
-      },
-    };
-  }, []);
-  
-  var mainPage = isAuthenticated? 'drawer' : 'signIn'
+  const [isAuthenticated, setIsAuthenticatd] = useState(false)
+
+  useEffect(() => {
+      setIsAuthenticatd(isLoggedIn())
+  }, [])
 
   return (
-    <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-          <stack.Navigator initialRouteName={mainPage} >
-            <stack.Screen options={{headerShown: false}} name="signIn" component={SignIn} />
-            <stack.Screen options={{headerShown: false}} name="signUp" component={SignUp} />
-            <stack.Screen options={{headerShown: false}} name="resetPassword" component={ResetPassword} />
-            <stack.Screen options={{headerShown: false}} name="sendEmail" component={SendEmail} />
-            <stack.Screen options={{headerShown: false}} name="drawer" component={DrawerNavigation} />
-            <stack.Screen name="createNote" component={CreateNote} options={{headerTitle:'Dashboard'}} />
-          </stack.Navigator>
+        <stack.Navigator initialRouteName={ isAuthenticated ? 'drawer' : 'signIn'}>
+          <stack.Screen options={{headerShown: false}} name="signIn" component={SignIn} />
+          <stack.Screen options={{headerShown: false}} name="signUp" component={SignUp} />
+          <stack.Screen options={{headerShown: false}} name="resetPassword" component={ResetPassword} />
+          <stack.Screen options={{headerShown: false}} name="sendEmail" component={SendEmail} />
+          <stack.Screen options={{headerShown: false}} name="drawer" component={DrawerNavigation} />
+          <stack.Screen name="createNote" component={CreateNote} options={{headerTitle: 'Dashboard'}}/>
+        </stack.Navigator>
       </NavigationContainer>
-    </AuthContext.Provider>
   );
 };
 export default AppNavigation;
