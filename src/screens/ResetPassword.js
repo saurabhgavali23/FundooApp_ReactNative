@@ -34,7 +34,7 @@ export const ResetPassword = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Fragment>
-        <StatusBar backgroundColor="blue" barStyle="light-content" />
+        <StatusBar backgroundColor="#007aff" barStyle="light-content" />
         <Text style={styles.text}>Reset Password</Text>
         <Input
           errorStyle={styles.error}
