@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-community/async-storage';
 import {setSnackBarMsg} from '../config/config';
 import {login} from '../services/userService';
-import styles from '../styles/SignInCss';
+import styles from '../styles/AuthScreensCss';
 
 export const SignIn = ({navigation}) => {
   const [Email, setEmail] = useState('');
