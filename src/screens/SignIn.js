@@ -15,8 +15,9 @@ export const SignIn = ({navigation}) => {
 
   const handleChange = () => {
     login(Email, Password)
-      .then((res) => {
-        AsyncStorage.setItem('userId', res.data.id)
+      .then(async (res) => {
+        const usertoken = JSON.stringify(res.data.id)
+       await AsyncStorage.setItem('userId', usertoken)
         AsyncStorage.setItem('userData', JSON.stringify(res.data));
         setSnackBarMsg('Login Sucessfull');
         navigation.navigate('drawer');

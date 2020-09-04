@@ -9,7 +9,7 @@ export const setSnackBarMsg = (message) => {
 };
 
 export const isLoggedIn = async() =>{
-  return await AsyncStorage.getItem('userId') !== null  
+  return await AsyncStorage.getItem('userId') !== null 
 };
 
 export const logout = async ()=>{

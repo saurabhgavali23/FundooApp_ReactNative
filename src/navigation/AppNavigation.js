@@ -7,8 +7,7 @@ import ResetPassword from '../screens/ResetPassword';
 import SendEmail from '../screens/SendEmail';
 import CreateNote from '../screens/CreateNote';
 import DrawerNavigation from './DrawerNavigation';
-import { isLoggedIn} from '../config/config';
-import { View, ActivityIndicator } from 'react-native';
+import { isLoggedIn } from '../config/config';
 
 const stack = createStackNavigator();
 
@@ -17,7 +16,7 @@ const AppNavigation = () => {
   const [isAuthenticated, setIsAuthenticatd] = useState(false)
 
   useEffect(() => {
-      setIsAuthenticatd(isLoggedIn())
+        setIsAuthenticatd(isLoggedIn())
   }, [])
 
   return (
@@ -28,7 +27,7 @@ const AppNavigation = () => {
           <stack.Screen options={{headerShown: false}} name="resetPassword" component={ResetPassword} />
           <stack.Screen options={{headerShown: false}} name="sendEmail" component={SendEmail} />
           <stack.Screen options={{headerShown: false}} name="drawer" component={DrawerNavigation} />
-          <stack.Screen name="createNote" component={CreateNote} options={{headerTitle: 'Dashboard'}}/>
+          <stack.Screen name="createNote" component={CreateNote} options={{headerShown: false}}/>
         </stack.Navigator>
       </NavigationContainer>
   );
