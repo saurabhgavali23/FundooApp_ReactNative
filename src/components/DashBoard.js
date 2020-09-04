@@ -13,10 +13,11 @@ const DashBoard = ({navigation}) => {
     <View style={styles.container}>
       <View>
         <Header
+        containerStyle={{backgroundColor:"#007aff"}}
           leftComponent={
             <Icon
               name="ios-menu"
-              size={30}
+              size={40}
               onPress={() => navigation.openDrawer()}
             />
           }
@@ -24,7 +25,7 @@ const DashBoard = ({navigation}) => {
           rightComponent={
             <Icon
               name="person-circle-outline"
-              size={30}
+              size={40}
               onPress={() => refRBSheet.current.open()}
             />
           }
