@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {View, TextInput, StyleSheet, StatusBar, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {Header} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -8,8 +8,11 @@ import Pin from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlusBox from 'react-native-vector-icons/Feather';
 import OptionIcon from 'react-native-vector-icons/SimpleLineIcons';
 import {saveNotes} from '../services/NoteService';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import CreateNoteFooterLeftOptions from './CreateNoteFooterLeftOptions';
 
 const CreateNote = ({navigation}) => {
+  const refRBSheet = useRef();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   var hour = new Date().getHours();
@@ -68,15 +71,34 @@ const CreateNote = ({navigation}) => {
       <View >
         <ScrollView>
         <View style={styles.footerContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=> refRBSheet.current.open()}>
           <PlusBox name="plus-square" size={25} />
           </TouchableOpacity>
           <Text style={styles.time}>{hour}:{min}</Text>
           <TouchableOpacity>
-          <OptionIcon name="options-vertical" size={25}/>
+          <OptionIcon name="options-vertical" size={25} onPress={()=> refRBSheet.current.open()}/>
           </TouchableOpacity>
         </View>
         </ScrollView>
+      </View>
+      <View>
+        <RBSheet
+          ref={refRBSheet}
+          closeOnDragDown={true}
+          closeOnPressMask={true}
+          customStyles={{
+            wrapper: {
+              backgroundColor: 'tranperent',
+              marginBottom: '11%'
+            },
+            draggableIcon:{
+              display: 'none'
+            }
+          }}
+          height={300}
+          >
+          <CreateNoteFooterLeftOptions/>
+          </RBSheet>
       </View>
     </View>
   );
