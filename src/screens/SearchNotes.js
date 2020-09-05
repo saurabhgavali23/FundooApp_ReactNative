@@ -1,32 +1,21 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import { SearchBar} from 'react-native-elements'
-import { color } from 'react-native-reanimated'
+import React from 'react';
+import {View, TextInput} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+import styles from '../styles/SearchNoteCss'
 
 export const SearchNotes = () => {
-    return (
-        <View>
-            <SearchBar 
-            inputContainerStyle={{backgroundColor: '#fff'}}
-            searchIcon={{size:24}}
-            containerStyle={styles.search}
-                placeholder="Search Notes"
-            />
-        </View>
-    )
-}
+  return (
+    <View style={styles.container}>
+      <View style={styles.searchIcon}>
+        <Icon name="search1" size={20} />
+        <TextInput
+          style={styles.input}
+          placeholder="Search Notes"
+          placeholderTextColor="gray"
+        />
+      </View>
+    </View>
+  );
+};
 
-const styles = StyleSheet.create({
-    search:{
-        alignItems: 'center',
-        flexDirection: 'row',
-        fontSize: 17,
-        height: "90%",
-        width: "130%",
-        backgroundColor: '#007aff',
-        marginTop: "1%",
-        borderRadius: 20,
-    }
-})
-
-export default SearchNotes
+export default SearchNotes;
