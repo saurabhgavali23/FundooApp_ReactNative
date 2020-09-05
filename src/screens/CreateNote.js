@@ -5,12 +5,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Archive from 'react-native-vector-icons/MaterialIcons';
 import Bell from 'react-native-vector-icons/FontAwesome';
 import Pin from 'react-native-vector-icons/MaterialCommunityIcons';
+import PlusBox from 'react-native-vector-icons/Feather';
+import OptionIcon from 'react-native-vector-icons/SimpleLineIcons';
 import {saveNotes} from '../services/NoteService';
 
 const CreateNote = ({navigation}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-
+  var hour = new Date().getHours();
+  var min = new Date().getMinutes();
   const handleChange = () => {
     saveNotes(title, description)
       .then((res) => {
@@ -62,6 +65,19 @@ const CreateNote = ({navigation}) => {
           onChangeText={(value) => setDescription(value)}
         />
       </View>
+      <View >
+        <ScrollView>
+        <View style={styles.footerContainer}>
+          <TouchableOpacity>
+          <PlusBox name="plus-square" size={25} />
+          </TouchableOpacity>
+          <Text style={styles.time}>{hour}:{min}</Text>
+          <TouchableOpacity>
+          <OptionIcon name="options-vertical" size={25}/>
+          </TouchableOpacity>
+        </View>
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -76,13 +92,22 @@ const styles = StyleSheet.create({
     height: '10%',
   },
   text2: {
-    height: '71%',
+    height: '75%',
   },
   headOpetions: {
     flexDirection: 'row',
   },
   optionMargin: {
     marginLeft: '40%',
+  },
+  footerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  time:{
+    fontSize: 20,
+    marginLeft: '25%',
+    marginRight: '25%'
   }
 });
 export default CreateNote;
