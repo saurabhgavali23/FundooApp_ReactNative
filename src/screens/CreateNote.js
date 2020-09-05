@@ -10,10 +10,8 @@ const CreateNote = ({navigation}) => {
     const [description, setDescription] = useState('')
 
     const handleChange = () =>{
-        const formData = new FormData()
-        formData.append('title', title)
-        formData.append('description', description)
-        saveNotes(formData).then(res=>{
+        
+        saveNotes(title,description).then(res=>{
             if(res.status === 200){
                 navigation.navigate('drawer')
             }

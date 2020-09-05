@@ -12,14 +12,17 @@ export const SignIn = ({navigation}) => {
   const [Password, setPassword] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleChange = () => {
+    setIsLoading(true)
     login(Email, Password)
       .then(async (res) => {
       try{
         await AsyncStorage.multiSet([['userId', JSON.stringify(res.data.id)],['userData', JSON.stringify(res.data)]])
       }catch(error){console.warn(error)}
         setSnackBarMsg('Login Sucessfull');
+        setIsLoading(false)
         navigation.navigate('drawer');
       })
       .catch((err) => {
@@ -47,7 +50,6 @@ export const SignIn = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Fragment>
         <StatusBar backgroundColor="#007aff" barStyle="light-content" />
         <Text style={styles.text}>SignIn</Text>
         <Input
@@ -70,6 +72,7 @@ export const SignIn = ({navigation}) => {
           secureTextEntry
         />
         <Button
+          loading={isLoading}
           containerStyle={styles.button}
           title="Login"
           onPress={() => handleChange()}
@@ -84,7 +87,6 @@ export const SignIn = ({navigation}) => {
           onPress={() => navigation.navigate('sendEmail')}>
           Forget Password
         </Text>
-      </Fragment>
     </View>
   );
 };
