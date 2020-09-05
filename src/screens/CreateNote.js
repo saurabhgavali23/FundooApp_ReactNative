@@ -9,7 +9,7 @@ import PlusBox from 'react-native-vector-icons/Feather';
 import OptionIcon from 'react-native-vector-icons/SimpleLineIcons';
 import {saveNotes} from '../services/NoteService';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import CreateNoteFooterLeftOptions from './CreateNoteFooterLeftOptions';
+import CreateNoteFooterRightOptions from './CreateNoteFooterRightOptions';
 
 const CreateNote = ({navigation}) => {
   const refRBSheet = useRef();
@@ -97,7 +97,7 @@ const CreateNote = ({navigation}) => {
           }}
           height={300}
           >
-          <CreateNoteFooterLeftOptions/>
+          <CreateNoteFooterRightOptions/>
           </RBSheet>
       </View>
     </View>
