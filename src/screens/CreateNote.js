@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
-import {View, TextInput, StyleSheet, StatusBar, Text, TouchableOpacity, ScrollView} from 'react-native';
-import {Header, Card} from 'react-native-elements';
+import {View, TextInput, StyleSheet, StatusBar, Text, TouchableOpacity, ScrollView, Modal} from 'react-native';
+import {Header, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Archive from 'react-native-vector-icons/MaterialIcons';
 import Bell from 'react-native-vector-icons/FontAwesome';
@@ -11,6 +11,7 @@ import {saveNotes} from '../services/NoteService';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CreateNoteFooterRightOptions from './CreateNoteFooterRightOptions';
 import CreateNoteFooterLeftOptions from './CreateNoteFooterLeftOptions';
+import Reminder from './Reminder';
 
 const CreateNote = ({navigation}) => {
   const refRBSheetLeft = useRef();
@@ -21,6 +22,12 @@ const CreateNote = ({navigation}) => {
   const [optionsToggle, setOptionsToggle] = useState(false)
   const [leftOption, setLeftOption] = useState(false)
   const [rightOption, setRightOption] = useState(false)
+
+  const [show, setShow] = useState(false)
+
+    const hideModal = () =>{
+        setShow(false)
+    }
 
   var hour = new Date().getHours();
   var min = new Date().getMinutes();
@@ -34,6 +41,10 @@ const CreateNote = ({navigation}) => {
       })
       .catch((err) => {});
   };
+
+  const openReminder = () =>{
+    setShow(true)
+  }
 
   const handleBottomSheetLeft = (value) =>{
 
@@ -65,7 +76,7 @@ const CreateNote = ({navigation}) => {
             <TouchableOpacity>
             <Pin name="pin" size={25} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=> openReminder()}>
             <Bell name="bell-o" size={25} style={{marginLeft: '40%'}}/>
             </TouchableOpacity>
             <TouchableOpacity>
@@ -143,6 +154,20 @@ const CreateNote = ({navigation}) => {
             <CreateNoteFooterRightOptions/>
           </RBSheet>
       </View>
+      <View style={styles.modalContainer}>
+      <Modal
+        transparent={true}
+        visible={show}
+      >
+      <View style={styles.modal}>
+        <Reminder/>
+          <View style={styles.modalButtonContainer}>
+          <Button containerStyle={styles.modelButton} title='close' onPress={()=> hideModal()}/>
+          <Button containerStyle={styles.modelButton} title='OK' onPress={()=> hideModal()}/>
+          </View>
+      </View>
+      </Modal>
+      </View>
     </View>
   );
 };
@@ -173,6 +198,23 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: '25%',
     marginRight: '25%'
+  },
+  modal:{
+    backgroundColor:'#fff', 
+    height: '30%',
+    width: '80%',
+    marginTop: '60%',
+    marginLeft: '10%'
+  },
+  modalButtonContainer:{
+    width: '60%',
+    flexDirection: 'row',
+    marginLeft: '50%',
+  },
+  modelButton:{
+    fontSize: 20,
+    marginRight: '20%',
+    marginTop: '10%'
   }
 });
 export default CreateNote;
