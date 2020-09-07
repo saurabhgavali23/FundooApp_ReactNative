@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {View, TextInput, StyleSheet, StatusBar, Text, TouchableOpacity, ScrollView} from 'react-native';
-import {Header} from 'react-native-elements';
+import {Header, Card} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Archive from 'react-native-vector-icons/MaterialIcons';
 import Bell from 'react-native-vector-icons/FontAwesome';
@@ -10,13 +10,21 @@ import OptionIcon from 'react-native-vector-icons/SimpleLineIcons';
 import {saveNotes} from '../services/NoteService';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CreateNoteFooterRightOptions from './CreateNoteFooterRightOptions';
+import CreateNoteFooterLeftOptions from './CreateNoteFooterLeftOptions';
 
 const CreateNote = ({navigation}) => {
-  const refRBSheet = useRef();
+  const refRBSheetLeft = useRef();
+  const refRBSheetRight = useRef(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [isOpen, setIsOpen] = useState(false)
+  const [optionsToggle, setOptionsToggle] = useState(false)
+  const [leftOption, setLeftOption] = useState(false)
+  const [rightOption, setRightOption] = useState(false)
+
   var hour = new Date().getHours();
   var min = new Date().getMinutes();
+
   const handleChange = () => {
     saveNotes(title, description)
       .then((res) => {
@@ -26,6 +34,20 @@ const CreateNote = ({navigation}) => {
       })
       .catch((err) => {});
   };
+
+  const handleBottomSheetLeft = (value) =>{
+
+    refRBSheetLeft.current.open()
+    setLeftOption(value)
+    setRightOption(false)
+  }
+  const handleBottomSheetRight = (value) =>{
+
+    refRBSheetRight.current.open()
+    
+    setRightOption(value)
+    setLeftOption(false)
+  }
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#007aff" barStyle="light-content" />
@@ -71,21 +93,22 @@ const CreateNote = ({navigation}) => {
       <View >
         <ScrollView>
         <View style={styles.footerContainer}>
-          <TouchableOpacity onPress={()=> refRBSheet.current.open()}>
+          <TouchableOpacity onPress={()=> handleBottomSheetLeft(true)}>
           <PlusBox name="plus-square" size={25} />
           </TouchableOpacity>
           <Text style={styles.time}>{hour}:{min}</Text>
-          <TouchableOpacity>
-          <OptionIcon name="options-vertical" size={25} onPress={()=> refRBSheet.current.open()}/>
+          <TouchableOpacity onPress={()=> handleBottomSheetRight(true)} >
+          <OptionIcon name="options-vertical" size={25} />
           </TouchableOpacity>
         </View>
         </ScrollView>
       </View>
       <View>
         <RBSheet
-          ref={refRBSheet}
+          ref={refRBSheetLeft}
           closeOnDragDown={true}
           closeOnPressMask={true}
+          onOpen={leftOption}
           customStyles={{
             wrapper: {
               backgroundColor: 'tranperent',
@@ -97,7 +120,27 @@ const CreateNote = ({navigation}) => {
           }}
           height={300}
           >
-          <CreateNoteFooterRightOptions/>
+            <CreateNoteFooterLeftOptions/>
+          </RBSheet>
+      </View>
+      <View>
+        <RBSheet
+        ref={refRBSheetRight}
+          closeOnDragDown={true}
+          closeOnPressMask={true}
+          onOpen={rightOption}
+          customStyles={{
+            wrapper: {
+              backgroundColor: 'tranperent',
+              marginBottom: '11%'
+            },
+            draggableIcon:{
+              display: 'none'
+            }
+          }}
+          height={300}
+          >
+            <CreateNoteFooterRightOptions/>
           </RBSheet>
       </View>
     </View>
