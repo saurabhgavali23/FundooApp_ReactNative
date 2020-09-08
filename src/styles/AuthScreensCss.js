@@ -31,6 +31,16 @@ const styles = StyleSheet.create({
   },
   buttonFont:{
     fontSize: 20
+  },
+  passworInput:{
+    width: '100%',
+    alignItems: 'center',
+    marginLeft: '10%'
+  },
+  passwordContainer:{
+    flexDirection: 'row',
+    marginRight: '10%', 
+    justifyContent: 'center'
   }
 });
 

@@ -1,7 +1,8 @@
 import React, {Fragment, useState} from 'react';
-import {View, StatusBar} from 'react-native';
+import {View, StatusBar, TouchableOpacity} from 'react-native';
 import {Input, Button, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Eye from 'react-native-vector-icons/Feather';
 import AsyncStorage from '@react-native-community/async-storage';
 import {setSnackBarMsg} from '../config/config';
 import {login} from '../services/userService';
@@ -13,6 +14,8 @@ export const SignIn = ({navigation}) => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isLoading, setIsLoading] = useState(false)
+  const [showPassord, setShowPassord] = useState(true)
+  const [isEyeOff, setIsEyeOff] = useState('eye-off')
 
   const handleChange = () => {
     setIsLoading(true)
@@ -49,6 +52,15 @@ export const SignIn = ({navigation}) => {
     }
   };
 
+  const handlePasswordToggle = () =>{
+    if(isEyeOff === 'eye-off'){
+        setIsEyeOff('eye')
+    }else{
+    setIsEyeOff('eye-off')
+    }
+    setShowPassord(!showPassord)
+  }
+
   return (
     <View style={styles.container}>
         <StatusBar backgroundColor="#007aff" barStyle="light-content" />
@@ -62,16 +74,21 @@ export const SignIn = ({navigation}) => {
           onBlur={emailValidation}
           leftIcon={<Icon name="envelope" size={24} color="black" />}
         />
+        <View style={styles.passwordContainer}>
         <Input
           errorStyle={styles.error}
           errorMessage={isValidPassword ? null : 'Invalid Password'}
-          inputContainerStyle={styles.input}
+          inputContainerStyle={styles.passworInput}
           placeholder="Password"
           onChangeText={(value) => setPassword(value)}
           onBlur={passwordValidation}
           leftIcon={<Icon name="lock" size={30} color="black" />}
-          secureTextEntry
+          secureTextEntry={showPassord}
         />
+        <TouchableOpacity onPress={()=> handlePasswordToggle()}>
+          <Eye name={isEyeOff} size={20}/>
+        </TouchableOpacity>
+        </View>
         <Button
           loading={isLoading}
           containerStyle={styles.button}
