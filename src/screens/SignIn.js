@@ -22,12 +22,12 @@ export const SignIn = ({navigation}) => {
         await AsyncStorage.multiSet([['userId', JSON.stringify(res.data.id)],['userData', JSON.stringify(res.data)]])
       }catch(error){console.warn(error)}
         setIsLoading(false)
-        setSnackBarMsg('Login Sucessfull');
+        setSnackBarMsg('Login Sucessfull','green');
         navigation.navigate('drawer');
       })
       .catch((err) => {
         setIsLoading(false)
-        setSnackBarMsg('Login Failed');
+        setSnackBarMsg('Login Failed','red');
       });
   };
 

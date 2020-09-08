@@ -14,12 +14,12 @@ export const SendEmail = ({navigation}) => {
     sendEmail(Email)
       .then((res) => {
         if(res.status == 200){
-          setSnackBarMsg("Email Sent ")
+          setSnackBarMsg("Email Sent ",'green')
           navigation.navigate('resetPassword')
         }
       })
       .catch((err) => {
-        setSnackBarMsg("Faild to sent Email")
+        setSnackBarMsg("Faild to sent Email",'red')
       });
   };
 

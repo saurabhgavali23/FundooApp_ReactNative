@@ -19,11 +19,11 @@ export const SignUp = ({navigation}) => {
   const handleChange = () => {
     registerData(FirstName, LastName, Email, Password)
       .then((res) => {
-        setSnackBarMsg(res.data.data.message);
+        setSnackBarMsg(res.data.data.message,'green');
         goToSignIn();
       })
       .catch((err) => {
-        setSnackBarMsg('user already exist');
+        setSnackBarMsg('user already exist','red');
       });
     console.log(FirstName, LastName, Email, Password);
   };
