@@ -48,10 +48,12 @@ export const SendEmail = ({navigation}) => {
         />
         <Button
           containerStyle={styles.button}
+          titleStyle={styles.buttonFont}
           title="Reset Password"
           onPress={() => handleChange()}
         />
-        <Button containerStyle={styles.button} title="SignIn" 
+        <Button containerStyle={styles.button} title="SignIn"
+            titleStyle={styles.buttonFont} 
             onPress={()=> navigation.navigate('signIn')}
         />
       </Fragment>

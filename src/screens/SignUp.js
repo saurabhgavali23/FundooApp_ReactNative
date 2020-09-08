@@ -112,11 +112,13 @@ export const SignUp = ({navigation}) => {
         />
         <Button
           containerStyle={styles.button}
+          titleStyle={styles.buttonFont}
           title="Register"
           onPress={() => handleChange()}
         />
         <Button
           containerStyle={styles.button}
+          titleStyle={styles.buttonFont}
           title="SignIn"
           onPress={() => navigation.navigate('signIn')}
         />

@@ -75,11 +75,13 @@ export const SignIn = ({navigation}) => {
         <Button
           loading={isLoading}
           containerStyle={styles.button}
+          titleStyle={styles.buttonFont}
           title="Login"
           onPress={() => handleChange()}
         />
         <Button
           containerStyle={styles.button}
+          titleStyle={styles.buttonFont}
           title="SignUp"
           onPress={() => navigation.navigate('signUp')}
         />

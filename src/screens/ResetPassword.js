@@ -58,11 +58,13 @@ export const ResetPassword = ({navigation}) => {
         />
         <Button
           containerStyle={styles.button}
+          titleStyle={styles.buttonFont}
           title="Submit"
           onPress={() => handleChange()}
         />
         <Button
           containerStyle={styles.button}
+          titleStyle={styles.buttonFont}
           title="SignIn"
           onPress={() => navigation.navigate('signIn')}
         />

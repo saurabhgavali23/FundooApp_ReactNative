@@ -13,7 +13,7 @@ const stack = createStackNavigator();
 
 const AppNavigation = () => {
 
-  const [isAuthenticated, setIsAuthenticatd] = useState(true)
+  const [isAuthenticated, setIsAuthenticatd] = useState(false)
 
   useEffect(() => {
         setIsAuthenticatd(isLoggedIn())
@@ -27,7 +27,7 @@ const AppNavigation = () => {
           <stack.Screen options={{headerShown: false}} name="resetPassword" component={ResetPassword} />
           <stack.Screen options={{headerShown: false}} name="sendEmail" component={SendEmail} />
           <stack.Screen options={{headerShown: false}} name="drawer" component={DrawerNavigation} />
-          <stack.Screen name="createNote" component={CreateNote} options={{headerShown: false}}/>
+          <stack.Screen options={{headerShown: false}} name="createNote" component={CreateNote} />
         </stack.Navigator>
       </NavigationContainer>
   );

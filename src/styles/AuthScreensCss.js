@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
   linkingUrl: {
     textDecorationLine: 'underline',
     fontSize: 20,
+  },
+  buttonFont:{
+    fontSize: 20
   }
 });
 
