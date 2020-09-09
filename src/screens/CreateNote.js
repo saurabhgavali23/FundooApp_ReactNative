@@ -97,14 +97,16 @@ const CreateNote = ({navigation}) => {
           </View>
         }
       />
+      <View style={styles.text1}>
       <TextInput
-        style={styles.text1}
+        style={{fontSize: 25}}
         placeholder="Title"
         multiline={true}
         value={title}
         onChangeText={(value) => setTitle(value)}
       />
-      <View style={styles.text2}>
+      </View>
+        <View style={styles.text2}>
         <TextInput
           placeholder="Notes"
           style={{fontSize: 22}}
@@ -112,8 +114,8 @@ const CreateNote = ({navigation}) => {
           value={description}
           onChangeText={(value) => setDescription(value)}
         />
-      </View>
-      <View style={{width:'60%'}}>
+        </View>
+      <View style={{width:'60%',}}>
         {
           showChip && (
           <RNChipView
@@ -123,8 +125,6 @@ const CreateNote = ({navigation}) => {
         />
         )}
       </View>
-      <View >
-        <ScrollView>
         <View style={styles.footerContainer}>
           <TouchableOpacity onPress={()=> handleBottomSheetLeft(true)}>
           <PlusBox name="plus-square" size={25} />
@@ -134,8 +134,6 @@ const CreateNote = ({navigation}) => {
           <OptionIcon name="options-vertical" size={25} />
           </TouchableOpacity>
         </View>
-        </ScrollView>
-      </View>
       <View>
         <RBSheet
           ref={refRBSheetLeft}
@@ -198,9 +196,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: '1%',
+    justifyContent: 'flex-start'
   },
   text1: {
-    fontSize: 25,
     height: '10%',
   },
   text2: {
@@ -213,14 +211,16 @@ const styles = StyleSheet.create({
     marginLeft: '40%',
   },
   footerContainer: {
+    position: 'absolute',
+    bottom: '1%',
+    left: '2%',
+    right: '1%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: '128%'
+    justifyContent: 'space-between',
+    alignSelf: 'center',
   },
   time:{
     fontSize: 20,
-    marginLeft: '25%',
-    marginRight: '25%'
   },
   modal:{
     backgroundColor:'#fff', 
