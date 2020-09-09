@@ -22,6 +22,8 @@
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-axios": "^0.17.1",
+    "react-native-chip-view": "0.0.12",
+    "react-native-chips": "^2.3.2",
     "react-native-elements": "^2.3.0",
     "react-native-formik": "^1.7.8",
     "react-native-gesture-handler": "^1.7.0",

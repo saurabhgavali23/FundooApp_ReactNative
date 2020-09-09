@@ -13,7 +13,7 @@ const stack = createStackNavigator();
 
 const AppNavigation = () => {
 
-  const [isAuthenticated, setIsAuthenticatd] = useState(false)
+  const [isAuthenticated, setIsAuthenticatd] = useState(true)
 
   useEffect(() => {
         setIsAuthenticatd(isLoggedIn())

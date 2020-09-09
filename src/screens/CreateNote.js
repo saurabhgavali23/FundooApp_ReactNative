@@ -7,11 +7,13 @@ import Bell from 'react-native-vector-icons/FontAwesome';
 import Pin from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlusBox from 'react-native-vector-icons/Feather';
 import OptionIcon from 'react-native-vector-icons/SimpleLineIcons';
+import Alarm from 'react-native-vector-icons/MaterialCommunityIcons';
 import {saveNotes} from '../services/NoteService';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CreateNoteFooterRightOptions from './CreateNoteFooterRightOptions';
 import CreateNoteFooterLeftOptions from './CreateNoteFooterLeftOptions';
 import Reminder from './Reminder';
+import {RNChipView} from 'react-native-chip-view'
 
 const CreateNote = ({navigation}) => {
   const refRBSheetLeft = useRef();
@@ -22,11 +24,21 @@ const CreateNote = ({navigation}) => {
   const [optionsToggle, setOptionsToggle] = useState(false)
   const [leftOption, setLeftOption] = useState(false)
   const [rightOption, setRightOption] = useState(false)
+  const [chipDateTime, setChipDateTime] = useState(null)
+  const [showChip, setShowChip] = useState(false)
 
   const [show, setShow] = useState(false)
 
     const hideModal = () =>{
         setShow(false)
+    }
+
+    const handleModel = () =>{
+      const date = new Date(chipDateTime).toLocaleDateString()
+      const time = new Date(chipDateTime).toLocaleTimeString()
+      setChipDateTime(date+','+time)
+      setShowChip(!showChip)
+      setShow(false)
     }
 
   var hour = new Date().getHours();
@@ -101,6 +113,16 @@ const CreateNote = ({navigation}) => {
           onChangeText={(value) => setDescription(value)}
         />
       </View>
+      <View style={{width:'60%'}}>
+        {
+          showChip && (
+          <RNChipView
+          title={chipDateTime}
+          avatar={<Alarm name='alarm' size={20}/>}
+          avatarStyle={styles.avatar}
+        />
+        )}
+      </View>
       <View >
         <ScrollView>
         <View style={styles.footerContainer}>
@@ -160,10 +182,10 @@ const CreateNote = ({navigation}) => {
         visible={show}
       >
       <View style={styles.modal}>
-        <Reminder/>
+        <Reminder setChipDateTime={setChipDateTime}/>
           <View style={styles.modalButtonContainer}>
           <Button containerStyle={styles.modelButton} title='close' onPress={()=> hideModal()}/>
-          <Button containerStyle={styles.modelButton} title='OK' onPress={()=> hideModal()}/>
+          <Button containerStyle={styles.modelButton} title='OK' onPress={()=> handleModel()}/>
           </View>
       </View>
       </Modal>
@@ -182,7 +204,7 @@ const styles = StyleSheet.create({
     height: '10%',
   },
   text2: {
-    height: '75%',
+    height: '10%',
   },
   headOpetions: {
     flexDirection: 'row',
@@ -193,6 +215,7 @@ const styles = StyleSheet.create({
   footerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginTop: '128%'
   },
   time:{
     fontSize: 20,
@@ -215,6 +238,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginRight: '20%',
     marginTop: '10%'
+  },
+  avatar:{
+    justifyContent:'center',
   }
 });
 export default CreateNote;

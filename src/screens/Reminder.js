@@ -10,34 +10,36 @@ import Calendar from 'react-native-vector-icons/AntDesign';
 import Time from 'react-native-vector-icons/Ionicons';
 import DateAndTimePicker from '@react-native-community/datetimepicker';
 
-const Reminder = () => {
+const Reminder = ({setChipDateTime}) => {
   const [isDateAndTimeVisible, setIsDateAndTimeVisible] = useState(false);
   const [date, setDate] = useState(new Date().toLocaleDateString());
   const [time, setTime] = useState(new Date().toLocaleTimeString());
   const [mode, setMode] = useState('date');
 
   const showDate = () => {
-    setIsDateAndTimeVisible(true);
+    setIsDateAndTimeVisible(!isDateAndTimeVisible);
     setMode('date');
   };
   const showTime = () => {
-    setIsDateAndTimeVisible(true);
+    setIsDateAndTimeVisible(!isDateAndTimeVisible);
     setMode('time');
   };
 
   const pickDataAndTime = async (event, selectedDate) => {
+    
     if (mode === 'date') {
-    const currentDate = new Date(selectedDate).toLocaleDateString()
+      let currentDate = new Date(selectedDate).toLocaleDateString()
       setDate(currentDate);
     } else {
-      const currentTime = new Date(selectedDate).toLocaleTimeString()
+      let currentTime = new Date(selectedDate).toLocaleTimeString()
       setTime(currentTime);
     }
-    await setIsDateAndTimeVisible(false);
+    setChipDateTime(selectedDate)
+    await setIsDateAndTimeVisible(!isDateAndTimeVisible);
   };
 
   const hideDateAndTime = async () => {
-    await setIsDateAndTimeVisible(false);
+    await setIsDateAndTimeVisible(!isDateAndTimeVisible);
   };
 
   return (
