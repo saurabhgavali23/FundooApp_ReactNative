@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     footerContainer: {
       position: 'absolute',
       bottom: '1%',
-      left: '2%',
-      right: '1%',
+      left: '5%',
+      right: '4%',
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignSelf: 'center',
