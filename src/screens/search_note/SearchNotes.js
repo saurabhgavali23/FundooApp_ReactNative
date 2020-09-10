@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import styles from '../styles/SearchNoteCss'
+import styles from './SearchNoteCss'
 
 export const SearchNotes = () => {
   return (

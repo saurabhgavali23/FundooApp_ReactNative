@@ -2,9 +2,9 @@ import React, {Fragment, useState} from 'react';
 import {View, StatusBar} from 'react-native';
 import {Input, Button, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {setSnackBarMsg} from '../config/config';
-import {registerData} from '../services/userService';
-import styles from '../styles/AuthScreensCss';
+import {setSnackBarMsg} from '../../config/config';
+import {registerData} from '../../services/userService';
+import styles from './styles';
 
 export const SignUp = ({navigation}) => {
   const [FirstName, setFirstName] = useState('');

@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import SignIn from '../screens/SignIn';
-import SignUp from '../screens/SignUp';
-import ResetPassword from '../screens/ResetPassword';
-import SendEmail from '../screens/SendEmail';
-import CreateNote from '../screens/CreateNote';
+import SignIn from '../screens/sign_in/SignIn';
+import SignUp from '../screens/sign_up/SignUp';
+import ResetPassword from '../screens/reset_password/ResetPassword';
+import SendEmail from '../screens/send_email/SendEmail';
+import CreateNote from '../screens/create_note/CreateNote';
 import DrawerNavigation from './DrawerNavigation';
 import { isLoggedIn } from '../config/config';
 

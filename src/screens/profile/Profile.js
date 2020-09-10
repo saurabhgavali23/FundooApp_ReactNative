@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 import {Avatar} from 'react-native-elements';
-import styles from '../styles/ProfileCss';
+import styles from './ProfileCss';
 import AsyncStorage from '@react-native-community/async-storage';
 import Logout from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { logout } from '../config/config'
+import { logout } from '../../config/config'
 
 const Profile = ({navigation}) => {
 

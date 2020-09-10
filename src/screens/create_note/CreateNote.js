@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {View, TextInput, StyleSheet, StatusBar, Text, TouchableOpacity, ScrollView, Modal} from 'react-native';
+import {View, TextInput, StatusBar, Text, TouchableOpacity, ScrollView, Modal} from 'react-native';
 import {Header, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Archive from 'react-native-vector-icons/MaterialIcons';
@@ -8,12 +8,13 @@ import Pin from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlusBox from 'react-native-vector-icons/Feather';
 import OptionIcon from 'react-native-vector-icons/SimpleLineIcons';
 import Alarm from 'react-native-vector-icons/MaterialCommunityIcons';
-import {saveNotes} from '../services/NoteService';
+import {saveNotes} from '../../services/NoteService';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import CreateNoteFooterRightOptions from './CreateNoteFooterRightOptions';
-import CreateNoteFooterLeftOptions from './CreateNoteFooterLeftOptions';
-import Reminder from './Reminder';
+import CreateNoteFooterRightOptions from '../create_note_footer_right_options/CreateNoteFooterRightOptions';
+import CreateNoteFooterLeftOptions from '../create_note_footer_left_options/CreateNoteFooterLeftOptions';
+import Reminder from '../reminder/Reminder';
 import {RNChipView} from 'react-native-chip-view'
+import styles from './styles'
 
 const CreateNote = ({navigation}) => {
   const refRBSheetLeft = useRef();
@@ -193,55 +194,5 @@ const CreateNote = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: '1%',
-    justifyContent: 'flex-start'
-  },
-  text1: {
-    height: '10%',
-  },
-  text2: {
-    height: '10%',
-  },
-  headOpetions: {
-    flexDirection: 'row',
-  },
-  optionMargin: {
-    marginLeft: '40%',
-  },
-  footerContainer: {
-    position: 'absolute',
-    bottom: '1%',
-    left: '2%',
-    right: '1%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'center',
-  },
-  time:{
-    fontSize: 20,
-  },
-  modal:{
-    backgroundColor:'#fff', 
-    height: '30%',
-    width: '80%',
-    marginTop: '60%',
-    marginLeft: '10%'
-  },
-  modalButtonContainer:{
-    width: '60%',
-    flexDirection: 'row',
-    marginLeft: '50%',
-  },
-  modelButton:{
-    fontSize: 20,
-    marginRight: '20%',
-    marginTop: '10%'
-  },
-  avatar:{
-    justifyContent:'center',
-  }
-});
+
 export default CreateNote;

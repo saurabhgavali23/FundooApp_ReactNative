@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {View, TouchableOpacity, Text} from 'react-native';
 import Camera from 'react-native-vector-icons/SimpleLineIcons';
 import Image from 'react-native-vector-icons/Feather';
 import Brush from 'react-native-vector-icons/Ionicons';
 import Mic from 'react-native-vector-icons/MaterialCommunityIcons';
 import Tickbox from 'react-native-vector-icons/AntDesign';
+import styles from './styles'
 
 const CreateNoteFooterLeftOptions = () => {
   return (
@@ -32,21 +33,5 @@ const CreateNoteFooterLeftOptions = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginLeft: '5%',
-    marginTop: '10%',
-  },
-  option: {
-    flexDirection: 'row',
-    marginBottom: '5%',
-  },
-  text: {
-    fontSize: 20,
-    marginLeft: '10%',
-  },
-});
 
 export default CreateNoteFooterLeftOptions;

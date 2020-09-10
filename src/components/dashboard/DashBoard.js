@@ -1,11 +1,12 @@
 import React, {useRef} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, Text} from 'react-native';
 import {Header} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NoteIcon from 'react-native-vector-icons/AntDesign';
-import SearchNotes from '../screens/SearchNotes';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import Profile from '../screens/Profile';
+import Profile from '../../screens/profile/Profile';
+import SearchNotes from '../../screens/search_note/SearchNotes';
+import styles from './styles'
 
 const DashBoard = ({navigation}) => {
   const refRBSheet = useRef();
@@ -21,7 +22,7 @@ const DashBoard = ({navigation}) => {
               onPress={() => navigation.openDrawer()}
             />
           }
-          centerComponent={<SearchNotes />}
+          centerComponent={<SearchNotes/>}
           rightComponent={
             <Icon
               name="person-circle-outline"
@@ -74,22 +75,5 @@ const DashBoard = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  plusicon: {
-    flex: 1,
-    flexDirection: 'column-reverse',
-    alignItems: 'flex-end',
-    marginRight: '5%',
-    marginBottom: '5%',
-  },
-  text: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default DashBoard;
