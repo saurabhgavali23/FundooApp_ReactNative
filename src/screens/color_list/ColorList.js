@@ -33,9 +33,9 @@ const ColorList = ({setBgColor}) => {
         <View
           style={{
             backgroundColor: item.id,
-            margin: 5,
-            width: 30,
-            height: 30,
+            margin: 10,
+            width: 50,
+            height: 50,
             borderRadius: 50,
             justifyContent: 'center',
             alignItems: 'center',
