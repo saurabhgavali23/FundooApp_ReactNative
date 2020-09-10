@@ -6,11 +6,11 @@ const styles = StyleSheet.create({
       padding: '1%',
       justifyContent: 'flex-start'
     },
-    text1: {
-      height: '10%',
+    title:{
+      fontSize: 25
     },
-    text2: {
-      height: '10%',
+    notes:{
+      fontSize: 22
     },
     headOpetions: {
       flexDirection: 'row',

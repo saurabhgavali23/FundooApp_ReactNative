@@ -99,19 +99,19 @@ const CreateNote = ({navigation}) => {
           </View>
         }
       />
-      <View style={styles.text1}>
+      <View>
       <TextInput
-        style={{fontSize: 25}}
+        style={styles.title}
         placeholder="Title"
         multiline={true}
         value={title}
         onChangeText={(value) => setTitle(value)}
       />
       </View>
-        <View style={styles.text2}>
+        <View>
         <TextInput
           placeholder="Notes"
-          style={{fontSize: 22}}
+          style={styles.notes}
           multiline={true}
           value={description}
           onChangeText={(value) => setDescription(value)}
