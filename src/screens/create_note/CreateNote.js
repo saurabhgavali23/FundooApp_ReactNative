@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {View, TextInput, StatusBar, Text, TouchableOpacity, ScrollView, Modal} from 'react-native';
+import {View, TextInput, StatusBar, Text, TouchableOpacity, Modal} from 'react-native';
 import {Header, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Archive from 'react-native-vector-icons/MaterialIcons';
@@ -17,18 +17,13 @@ import {RNChipView} from 'react-native-chip-view'
 import styles from './styles'
 
 const CreateNote = ({navigation}) => {
-  const refRBSheetLeft = useRef();
-  const refRBSheetRight = useRef(null);
+  const refRBSheet = useRef();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [isOpen, setIsOpen] = useState(false)
   const [optionsToggle, setOptionsToggle] = useState(false)
-  const [leftOption, setLeftOption] = useState(false)
-  const [rightOption, setRightOption] = useState(false)
   const [chipDateTime, setChipDateTime] = useState(null)
   const [showChip, setShowChip] = useState(false)
   const [bgColor, setBgColor] = useState('#F0FFF0')
-
   const [show, setShow] = useState(false)
 
     const hideModal = () =>{
@@ -60,19 +55,11 @@ const CreateNote = ({navigation}) => {
     setShow(true)
   }
 
-  const handleBottomSheetLeft = (value) =>{
-
-    refRBSheetLeft.current.open()
-    setLeftOption(value)
-    setRightOption(false)
+  const handleBottomSheet = () =>{
+    refRBSheet.current.open()
+    setOptionsToggle(!optionsToggle)
   }
-  const handleBottomSheetRight = (value) =>{
-
-    refRBSheetRight.current.open()
-    
-    setRightOption(value)
-    setLeftOption(false)
-  }
+  
   return (
     <View style={[styles.container,{backgroundColor: bgColor}]}>
       <StatusBar backgroundColor="#007aff" barStyle="light-content" />
@@ -128,20 +115,19 @@ const CreateNote = ({navigation}) => {
         )}
       </View>
         <View style={styles.footerContainer}>
-          <TouchableOpacity onPress={()=> handleBottomSheetLeft(true)}>
+          <TouchableOpacity onPress={()=> handleBottomSheet()}>
           <PlusBox name="plus-square" size={25} />
           </TouchableOpacity>
           <Text style={styles.time}>{hour}:{min}</Text>
-          <TouchableOpacity onPress={()=> handleBottomSheetRight(true)} >
+          <TouchableOpacity onPress={()=> handleBottomSheet()} >
           <OptionIcon name="options-vertical" size={25} />
           </TouchableOpacity>
         </View>
       <View>
         <RBSheet
-          ref={refRBSheetLeft}
+          ref={refRBSheet}
           closeOnDragDown={true}
           closeOnPressMask={true}
-          onOpen={leftOption}
           customStyles={{
             wrapper: {
               backgroundColor: 'tranperent',
@@ -153,27 +139,10 @@ const CreateNote = ({navigation}) => {
           }}
           height={300}
           >
-            <CreateNoteFooterLeftOptions/>
-          </RBSheet>
-      </View>
-      <View>
-        <RBSheet
-        ref={refRBSheetRight}
-          closeOnDragDown={true}
-          closeOnPressMask={true}
-          onOpen={rightOption}
-          customStyles={{
-            wrapper: {
-              backgroundColor: 'tranperent',
-              marginBottom: '11%'
-            },
-            draggableIcon:{
-              display: 'none'
-            }
-          }}
-          height={300}
-          >
+            {optionsToggle?
+            <CreateNoteFooterLeftOptions/> :
             <CreateNoteFooterRightOptions setBgColor={setBgColor}/>
+            }
           </RBSheet>
       </View>
       <View style={styles.modalContainer}>
@@ -193,6 +162,5 @@ const CreateNote = ({navigation}) => {
     </View>
   );
 };
-
 
 export default CreateNote;
