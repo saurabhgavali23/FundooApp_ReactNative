@@ -55,9 +55,9 @@ const CreateNote = ({navigation}) => {
     setShow(true)
   }
 
-  const handleBottomSheet = () =>{
+  const handleBottomSheet = (value) =>{
     refRBSheet.current.open()
-    setOptionsToggle(!optionsToggle)
+    setOptionsToggle(value)
   }
   
   return (
@@ -115,11 +115,11 @@ const CreateNote = ({navigation}) => {
         )}
       </View>
         <View style={styles.footerContainer}>
-          <TouchableOpacity onPress={()=> handleBottomSheet()}>
+          <TouchableOpacity onPress={()=> handleBottomSheet(true)}>
           <PlusBox name="plus-square" size={25} />
           </TouchableOpacity>
           <Text style={styles.time}>{hour}:{min}</Text>
-          <TouchableOpacity onPress={()=> handleBottomSheet()} >
+          <TouchableOpacity onPress={()=> handleBottomSheet(false)} >
           <OptionIcon name="options-vertical" size={25} />
           </TouchableOpacity>
         </View>
