@@ -7,7 +7,7 @@ import Labels from 'react-native-vector-icons/MaterialCommunityIcons';
 import Delete from 'react-native-vector-icons/AntDesign';
 import ColorList from './ColorList';
 
-const CreateNoteFooterRightOptions = () => {
+const CreateNoteFooterRightOptions = ({setBgColor}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.option}>
@@ -31,7 +31,7 @@ const CreateNoteFooterRightOptions = () => {
         <Text style={styles.text}>Labels</Text>
       </TouchableOpacity>
       <View>
-        <ColorList />
+        <ColorList setBgColor={setBgColor} />
       </View>
     </View>
   );

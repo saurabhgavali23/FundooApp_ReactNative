@@ -26,6 +26,7 @@ const CreateNote = ({navigation}) => {
   const [rightOption, setRightOption] = useState(false)
   const [chipDateTime, setChipDateTime] = useState(null)
   const [showChip, setShowChip] = useState(false)
+  const [bgColor, setBgColor] = useState('#F0FFF0')
 
   const [show, setShow] = useState(false)
 
@@ -72,10 +73,10 @@ const CreateNote = ({navigation}) => {
     setLeftOption(false)
   }
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{backgroundColor: bgColor}]}>
       <StatusBar backgroundColor="#007aff" barStyle="light-content" />
       <Header
-        containerStyle={{backgroundColor: '#fff'}}
+        containerStyle={{backgroundColor: bgColor}}
         leftComponent={
           <Icon
             name="arrow-back-outline"
@@ -171,7 +172,7 @@ const CreateNote = ({navigation}) => {
           }}
           height={300}
           >
-            <CreateNoteFooterRightOptions/>
+            <CreateNoteFooterRightOptions setBgColor={setBgColor}/>
           </RBSheet>
       </View>
       <View style={styles.modalContainer}>

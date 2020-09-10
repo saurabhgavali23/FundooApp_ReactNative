@@ -1,9 +1,8 @@
 import React from 'react';
 import {View, FlatList, TouchableOpacity} from 'react-native';
 
-const ColorList = () => {
+const ColorList = ({setBgColor}) => {
   const DATA = [
-    {title: 'BLACK', id: '#000000'},
     {title: 'MAROON', id: '#800000'},
     {title: 'WHITE', id: '#FFFFFF'},
     {title: 'salmon5', id: '#CFAFAF'},
@@ -24,9 +23,13 @@ const ColorList = () => {
     {title: 'bloodred', id: '#FF6666'},
   ];
 
+  const selectColor = (value) => {
+    setBgColor(value);
+  };
+
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => selectColor(item.id)}>
         <View
           style={{
             backgroundColor: item.id,
@@ -34,6 +37,8 @@ const ColorList = () => {
             width: 30,
             height: 30,
             borderRadius: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
           }}></View>
       </TouchableOpacity>
     );
