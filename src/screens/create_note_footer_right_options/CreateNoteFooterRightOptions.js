@@ -24,10 +24,6 @@ const CreateNoteFooterRightOptions = ({setBgColor}) => {
         <Text style={styles.text}>Send</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.option}>
-        <Collaborate name="user-plus" size={27} />
-        <Text style={styles.text}>Collaborator</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.labelOption}>
         <Labels name="label-outline" size={25} />
         <Text style={styles.text}>Labels</Text>
       </TouchableOpacity>
