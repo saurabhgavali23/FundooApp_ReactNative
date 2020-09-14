@@ -49,6 +49,10 @@ const styles = StyleSheet.create({
     },
     avatar:{
       justifyContent:'center',
+    },
+    addLabelChip:{
+      width: '40%',
+      marginTop: '1%'
     }
   });
 

@@ -16,7 +16,7 @@ import Reminder from '../reminder/Reminder';
 import {RNChipView} from 'react-native-chip-view'
 import styles from './styles'
 
-const CreateNote = ({navigation}) => {
+const CreateNote = ({navigation, route}) => {
   const refRBSheet = useRef();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -25,10 +25,11 @@ const CreateNote = ({navigation}) => {
   const [showChip, setShowChip] = useState(false)
   const [bgColor, setBgColor] = useState('#F0FFF0')
   const [show, setShow] = useState(false)
-
+  const addLabels = route.params;
+  
     const hideModal = () =>{
         setShow(false)
-    }
+    }   
 
     const handleModel = () =>{
       const date = new Date(chipDateTime).toLocaleDateString()
@@ -114,6 +115,15 @@ const CreateNote = ({navigation}) => {
         />
         )}
       </View>
+      <View style={styles.addLabelChip}>
+        {
+          addLabels!==undefined ? (
+          <RNChipView
+          title={addLabels.data+''}
+          avatar={false}
+        />
+        ): null}
+      </View>
         <View style={styles.footerContainer}>
           <TouchableOpacity onPress={()=> handleBottomSheet(true)}>
           <PlusBox name="plus-square" size={25} />
@@ -141,7 +151,7 @@ const CreateNote = ({navigation}) => {
           >
             {optionsToggle?
             <CreateNoteFooterLeftOptions/> :
-            <CreateNoteFooterRightOptions setBgColor={setBgColor}/>
+            <CreateNoteFooterRightOptions setBgColor={setBgColor} navigation={navigation}/>
             }
           </RBSheet>
       </View>
