@@ -25,7 +25,7 @@ const CreateNote = ({navigation, route}) => {
   const [showChip, setShowChip] = useState(false)
   const [bgColor, setBgColor] = useState('#F0FFF0')
   const [show, setShow] = useState(false)
-  const [isArchive, setIsArchive] = useState('archive-outline')
+  const [isArchive, setIsArchive] = useState(false)
   const addLabels = route.params;
   
     const hideModal = () =>{
@@ -87,8 +87,8 @@ const CreateNote = ({navigation, route}) => {
             <Bell name="bell-o" size={25} style={{marginLeft: '40%'}}/>
             </TouchableOpacity>
             <TouchableOpacity>
-            <Archive name={isArchive} size={25} style={{marginLeft: '28%'}}
-              onPress={()=> handleArchive()}/>
+            <Archive name={isArchive?'archive':'archive-outline'} size={25} style={{marginLeft: '28%'}}
+              onPress={()=> setIsArchive(!isArchive)}/>
             </TouchableOpacity>
           </View>
         }
