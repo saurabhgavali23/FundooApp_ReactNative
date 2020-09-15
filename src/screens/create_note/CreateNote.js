@@ -26,6 +26,7 @@ const CreateNote = ({navigation, route}) => {
   const [bgColor, setBgColor] = useState('#F0FFF0')
   const [show, setShow] = useState(false)
   const [isArchive, setIsArchive] = useState(false)
+  const [isPined, setIsPined] = useState(false)
   const addLabels = route.params;
   
     const hideModal = () =>{
@@ -81,7 +82,8 @@ const CreateNote = ({navigation, route}) => {
         rightComponent={
           <View style={styles.headOpetions}>
             <TouchableOpacity>
-            <Pin name="pin" size={25} />
+            <Pin name={isPined? 'pin':'pin-outline'} size={25} 
+              onPress={()=> setIsPined(!isPined)}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=> openReminder()}>
             <Bell name="bell-o" size={25} style={{marginLeft: '40%'}}/>
