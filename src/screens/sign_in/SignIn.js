@@ -14,8 +14,7 @@ export const SignIn = ({navigation}) => {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isLoading, setIsLoading] = useState(false)
-  const [showPassord, setShowPassord] = useState(true)
-  const [isEyeOff, setIsEyeOff] = useState('eye-off')
+  const [isEyeOff, setIsEyeOff] = useState(true)
 
   const handleChange = () => {
     setIsLoading(true)
@@ -52,15 +51,6 @@ export const SignIn = ({navigation}) => {
     }
   };
 
-  const handlePasswordToggle = () =>{
-    if(isEyeOff === 'eye-off'){
-        setIsEyeOff('eye')
-    }else{
-    setIsEyeOff('eye-off')
-    }
-    setShowPassord(!showPassord)
-  }
-
   return (
     <View style={styles.container}>
         <StatusBar backgroundColor="#007aff" barStyle="light-content" />
@@ -83,14 +73,15 @@ export const SignIn = ({navigation}) => {
           onChangeText={(value) => setPassword(value)}
           onBlur={passwordValidation}
           leftIcon={<Icon name="lock" size={30} color="black" />}
-          secureTextEntry={showPassord}
+          secureTextEntry={isEyeOff}
         />
-        <TouchableOpacity onPress={()=> handlePasswordToggle()}>
-          <Eye name={isEyeOff} size={20}/>
+        <TouchableOpacity onPress={()=> setIsEyeOff(!isEyeOff)}>
+          <Eye name={isEyeOff? 'eye-off' : 'eye'} size={20} style={styles.eyeStyle}/>
         </TouchableOpacity>
         </View>
         <Button
           loading={isLoading}
+          loadingProps={{size: 25}}
           containerStyle={styles.button}
           titleStyle={styles.buttonFont}
           title="Login"

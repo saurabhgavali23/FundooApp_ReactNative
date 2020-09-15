@@ -34,14 +34,16 @@ const styles = StyleSheet.create({
   },
   passworInput:{
     width: '100%',
-    alignItems: 'center',
-    marginLeft: '10%'
+    marginLeft: '9%'
   },
   passwordContainer:{
     flexDirection: 'row',
     marginRight: '10%', 
     justifyContent: 'center'
-  }
+  },
+  eyeStyle:{
+    marginTop: 15
+  },
 });
 
   export default styles;
