@@ -27,11 +27,7 @@ const CreateNote = ({navigation, route}) => {
   const [show, setShow] = useState(false)
   const [isArchive, setIsArchive] = useState(false)
   const [isPined, setIsPined] = useState(false)
-  const addLabels = route.params;
-  
-    const hideModal = () =>{
-        setShow(false)
-    }   
+  const addLabels = route.params;  
 
     const handleModel = () =>{
       const date = new Date(chipDateTime).toLocaleDateString()
@@ -54,17 +50,9 @@ const CreateNote = ({navigation, route}) => {
       .catch((err) => {});
   };
 
-  const openReminder = () =>{
-    setShow(true)
-  }
-
   const handleBottomSheet = (value) =>{
     refRBSheet.current.open()
     setOptionsToggle(value)
-  }
-
-  const handleArchive = () => {
-    isArchive !== 'archive' ? setIsArchive('archive') : setIsArchive('archive-outline')
   }
   
   return (
@@ -81,16 +69,14 @@ const CreateNote = ({navigation, route}) => {
         }
         rightComponent={
           <View style={styles.headOpetions}>
-            <TouchableOpacity>
-            <Pin name={isPined? 'pin':'pin-outline'} size={25} 
-              onPress={()=> setIsPined(!isPined)}/>
+            <TouchableOpacity onPress={()=> setIsPined(!isPined)}>
+            <Pin name={isPined? 'pin':'pin-outline'} size={25} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=> openReminder()}>
+            <TouchableOpacity onPress={()=> setShow(true)}>
             <Bell name="bell-o" size={25} style={{marginLeft: '40%'}}/>
             </TouchableOpacity>
-            <TouchableOpacity>
-            <Archive name={isArchive?'archive':'archive-outline'} size={25} style={{marginLeft: '28%'}}
-              onPress={()=> setIsArchive(!isArchive)}/>
+            <TouchableOpacity onPress={()=> setIsArchive(!isArchive)}>
+            <Archive name={isArchive?'archive':'archive-outline'} size={25} style={{marginLeft: '28%'}}/>
             </TouchableOpacity>
           </View>
         }
@@ -171,7 +157,7 @@ const CreateNote = ({navigation, route}) => {
       <View style={styles.modal}>
         <Reminder setChipDateTime={setChipDateTime}/>
           <View style={styles.modalButtonContainer}>
-          <Button containerStyle={styles.modelButton} title='close' onPress={()=> hideModal()}/>
+          <Button containerStyle={styles.modelButton} title='close' onPress={()=> setShow(false)}/>
           <Button containerStyle={styles.modelButton} title='OK' onPress={()=> handleModel()}/>
           </View>
       </View>
