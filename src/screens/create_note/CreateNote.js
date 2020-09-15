@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react';
 import {View, TextInput, StatusBar, Text, TouchableOpacity, Modal} from 'react-native';
 import {Header, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Archive from 'react-native-vector-icons/MaterialIcons';
+import Archive from 'react-native-vector-icons/Ionicons';
 import Bell from 'react-native-vector-icons/FontAwesome';
 import Pin from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlusBox from 'react-native-vector-icons/Feather';
@@ -25,6 +25,7 @@ const CreateNote = ({navigation, route}) => {
   const [showChip, setShowChip] = useState(false)
   const [bgColor, setBgColor] = useState('#F0FFF0')
   const [show, setShow] = useState(false)
+  const [isArchive, setIsArchive] = useState('archive-outline')
   const addLabels = route.params;
   
     const hideModal = () =>{
@@ -60,6 +61,10 @@ const CreateNote = ({navigation, route}) => {
     refRBSheet.current.open()
     setOptionsToggle(value)
   }
+
+  const handleArchive = () => {
+    isArchive !== 'archive' ? setIsArchive('archive') : setIsArchive('archive-outline')
+  }
   
   return (
     <View style={[styles.container,{backgroundColor: bgColor}]}>
@@ -82,7 +87,8 @@ const CreateNote = ({navigation, route}) => {
             <Bell name="bell-o" size={25} style={{marginLeft: '40%'}}/>
             </TouchableOpacity>
             <TouchableOpacity>
-            <Archive name="archive" size={25} style={{marginLeft: '28%'}}/>
+            <Archive name={isArchive} size={25} style={{marginLeft: '28%'}}
+              onPress={()=> handleArchive()}/>
             </TouchableOpacity>
           </View>
         }
