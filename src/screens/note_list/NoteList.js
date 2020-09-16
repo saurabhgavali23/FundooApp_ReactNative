@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import {getNotes} from '../../services/NoteService';
 import {Card} from 'react-native-elements';
 import styles from './styles';
@@ -19,14 +19,14 @@ const NoteList = () => {
   }, []);
 
   return (
-    <View>
+    <ScrollView>
       {notes.map((item, index) => (
-        <Card key={index} containerStyle={styles.card}>
+        <Card key={index} containerStyle={[styles.card],{backgroundColor: item.color}}>
           <Text style={styles.titleFont}>{item.title}</Text>
           <Text style={styles.discriptionFont}>{item.description}</Text>
         </Card>
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
