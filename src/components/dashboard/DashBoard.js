@@ -7,6 +7,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import Profile from '../../screens/profile/Profile';
 import SearchNotes from '../../screens/search_note/SearchNotes';
 import styles from './styles'
+import NoteList from '../../screens/note_list/NoteList';
 
 const DashBoard = ({navigation}) => {
   const refRBSheet = useRef();
@@ -32,8 +33,8 @@ const DashBoard = ({navigation}) => {
           }
         />
       </View>
-      <View style={styles.text}>
-        <Text style={{fontSize:30}}>FundooApp</Text>
+      <View>
+      <NoteList/>
       </View>
       <View style={styles.plusicon}>
         <NoteIcon

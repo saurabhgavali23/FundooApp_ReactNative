@@ -13,3 +13,16 @@ export const saveNotes = async (data) => {
         }
     )
 }
+
+export const getNotes = async () => {
+
+    var token = await AsyncStorage.getItem('userId')
+    return axios.get(
+        'http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesList',
+        {
+            headers:{
+                Authorization : token
+            }
+        }
+    )
+}
