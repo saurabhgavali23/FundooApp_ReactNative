@@ -41,7 +41,14 @@ const CreateNote = ({navigation, route}) => {
   var min = new Date().getMinutes();
 
   const handleChange = () => {
-    saveNotes(title, description)
+    let labelValue = addLabels.data.toString()
+    let formData = new FormData()
+        formData.append('title', title)
+        formData.append('description', description)
+        formData.append('labelIdList', labelValue)
+        formData.append('color', bgColor)
+        formData.append('reminder', chipDateTime)
+    saveNotes(formData)
       .then((res) => {
         if (res.status === 200) {
           navigation.navigate('drawer');
@@ -113,7 +120,7 @@ const CreateNote = ({navigation, route}) => {
         {
           addLabels!==undefined ? (
           <RNChipView
-          title={addLabels.data+''}
+          title={addLabels.data.toString()}
           avatar={false}
         />
         ): null}
