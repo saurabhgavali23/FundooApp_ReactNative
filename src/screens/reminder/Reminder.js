@@ -34,7 +34,7 @@ const Reminder = ({setChipDateTime}) => {
       let currentTime = new Date(selectedDate).toLocaleTimeString()
       setTime(currentTime);
     }
-    setChipDateTime(selectedDate)
+    setChipDateTime(date+','+time)
     await setIsDateAndTimeVisible(!isDateAndTimeVisible);
   };
 

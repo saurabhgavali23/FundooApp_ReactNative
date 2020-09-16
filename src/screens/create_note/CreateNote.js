@@ -30,9 +30,6 @@ const CreateNote = ({navigation, route}) => {
   const addLabels = route.params;  
 
     const handleModel = () =>{
-      const date = new Date(chipDateTime).toLocaleDateString()
-      const time = new Date(chipDateTime).toLocaleTimeString()
-      setChipDateTime(date+','+time)
       setShowChip(!showChip)
       setShow(false)
     }
@@ -41,13 +38,14 @@ const CreateNote = ({navigation, route}) => {
   var min = new Date().getMinutes();
 
   const handleChange = () => {
-    let labelValue = addLabels.data.toString()
+    let labelValue = addLabels!== undefined? addLabels.data.toString():''
     let formData = new FormData()
         formData.append('title', title)
         formData.append('description', description)
-        formData.append('labelIdList', labelValue)
+        formData.append('label', labelValue)
         formData.append('color', bgColor)
         formData.append('reminder', chipDateTime)
+        
     saveNotes(formData)
       .then((res) => {
         if (res.status === 200) {
@@ -55,7 +53,7 @@ const CreateNote = ({navigation, route}) => {
         }
       })
       .catch((err) => {});
-  };
+   };
 
   const handleBottomSheet = (value) =>{
     refRBSheet.current.open()
