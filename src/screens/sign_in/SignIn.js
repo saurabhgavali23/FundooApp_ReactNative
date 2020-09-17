@@ -4,7 +4,7 @@ import {Input, Button, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Eye from 'react-native-vector-icons/Feather';
 import AsyncStorage from '@react-native-community/async-storage';
-import {setSnackBarMsg} from '../../config/config';
+import {setSnackBarMsg} from '../../config/configuration';
 import {login} from '../../services/userService';
 import styles from './styles';
 

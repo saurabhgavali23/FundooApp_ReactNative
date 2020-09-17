@@ -1,5 +1,7 @@
 import  axios  from 'axios'
 import AsyncStorage from '@react-native-community/async-storage'
+import Config from 'react-native-config'
+import NoteApi from '../config/NoteApi'
 
 export const registerData = (FirstName, LastName, Email, Password) => {
 
@@ -11,7 +13,7 @@ export const registerData = (FirstName, LastName, Email, Password) => {
         password: Password
     }
     return axios.post(
-        'http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp',
+        Config.REACT_APP_BASE_URL+NoteApi.userSignUp,
         Data        
     )
 }
@@ -23,7 +25,7 @@ export const login = (Email, Password) => {
     }
 
     return axios.post(
-        'http://fundoonotes.incubation.bridgelabz.com/api/user/login',
+        Config.REACT_APP_BASE_URL+NoteApi.userLogin,
         Data
     )
 }
@@ -34,7 +36,7 @@ export const sendEmail = (Email) =>{
     }
      var token = AsyncStorage.getItem('userId')
     return axios.post(
-        'http://fundoonotes.incubation.bridgelabz.com/api/user/reset',
+        Config.REACT_APP_BASE_URL+NoteApi.userReset,
         Data,{
             headers: {
                 Authorization : token

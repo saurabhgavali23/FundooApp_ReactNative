@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react';
 import {View, StatusBar} from 'react-native';
 import {Input, Button, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {setSnackBarMsg} from '../../config/config';
+import {setSnackBarMsg} from '../../config/configuration';
 import {registerData} from '../../services/userService';
 import styles from './styles';
 

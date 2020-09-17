@@ -7,7 +7,7 @@ import ResetPassword from '../screens/reset_password/ResetPassword';
 import SendEmail from '../screens/send_email/SendEmail';
 import CreateNote from '../screens/create_note/CreateNote';
 import DrawerNavigation from './DrawerNavigation';
-import { isLoggedIn } from '../config/config';
+import { isLoggedIn } from '../config/configuration';
 
 const stack = createStackNavigator();
 

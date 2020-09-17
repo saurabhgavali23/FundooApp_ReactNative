@@ -6,7 +6,7 @@ import styles from './styles';
 
 const NoteList = () => {
   const [notes, setNotes] = useState([]);
-
+  
   useEffect(() => {
     getNotes()
       .then((res) => {

@@ -5,7 +5,7 @@ import styles from './ProfileCss';
 import AsyncStorage from '@react-native-community/async-storage';
 import Logout from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { logout } from '../../config/config'
+import { logout } from '../../config/configuration'
 
 const Profile = ({navigation}) => {
 
