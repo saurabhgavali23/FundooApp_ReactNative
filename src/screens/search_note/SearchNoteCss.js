@@ -5,10 +5,11 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
       flexDirection: 'row',
-      width: '125%',
+      width: '110%',
       marginTop: '2%',
       marginBottom: '2%',
-      borderRadius: 5,
+      borderRadius: 5, 
+      marginRight: '3%'     
     },
     searchIcon: {
       flexDirection: 'row',

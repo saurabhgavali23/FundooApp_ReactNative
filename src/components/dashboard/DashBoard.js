@@ -1,5 +1,5 @@
-import React, {useRef} from 'react';
-import {View, Text} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {Header} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NoteIcon from 'react-native-vector-icons/AntDesign';
@@ -8,13 +8,17 @@ import Profile from '../../screens/profile/Profile';
 import SearchNotes from '../../screens/search_note/SearchNotes';
 import styles from './styles'
 import NoteList from '../../screens/note_list/NoteList';
+import NoteViewIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const DashBoard = ({navigation}) => {
+
   const refRBSheet = useRef();
+  const [isList, setIsList] = useState(false)
   return (
     <View style={styles.container}>
       <View>
         <Header
+        centerContainerStyle={styles.centerContainer}
         containerStyle={{backgroundColor:"#007aff"}}
           leftComponent={
             <Icon
@@ -25,16 +29,23 @@ const DashBoard = ({navigation}) => {
           }
           centerComponent={<SearchNotes/>}
           rightComponent={
+            <View style={styles.rightIcons}>
+            <TouchableOpacity onPress={()=>setIsList(!isList)}>
+            <NoteViewIcon name={isList?'view-agenda-outline':'view-grid-outline'} size={30}
+                style={styles.listIcon}
+            />
+            </TouchableOpacity>
             <Icon
               name="person-circle-outline"
               size={40}
               onPress={() => refRBSheet.current.open()}
             />
+            </View>
           }
         />
       </View>
       <View>
-      <NoteList/>
+      <NoteList isList={isList}/>
       </View>
       <View style={styles.plusicon}>
         <NoteIcon

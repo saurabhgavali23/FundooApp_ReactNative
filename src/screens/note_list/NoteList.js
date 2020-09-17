@@ -4,9 +4,8 @@ import {getNotes} from '../../services/NoteService';
 import {Card} from 'react-native-elements';
 import styles from './styles';
 
-const NoteList = () => {
+const NoteList = ({isList}) => {
   const [notes, setNotes] = useState([]);
-  
   useEffect(() => {
     getNotes()
       .then((res) => {
@@ -20,12 +19,19 @@ const NoteList = () => {
 
   return (
     <ScrollView>
-      {notes.map((item, index) => (
-        <Card key={index} containerStyle={[styles.card],{backgroundColor: item.color}}>
-          <Text style={styles.titleFont}>{item.title}</Text>
-          <Text style={styles.discriptionFont}>{item.description}</Text>
-        </Card>
-      ))}
+      <View style={isList ? styles.container : null}>
+        {notes.map((item, index) => (
+          <Card
+            key={index}
+            containerStyle={[
+              isList ? styles.card : null,
+              {backgroundColor: item.color},
+            ]}>
+            <Text style={styles.titleFont}>{item.title}</Text>
+            <Text style={styles.discriptionFont}>{item.description}</Text>
+          </Card>
+        ))}
+      </View>
     </ScrollView>
   );
 };

@@ -16,6 +16,16 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    rightIcons:{
+      flexDirection: 'row', 
+      alignItems: 'center'
+    },
+    listIcon:{
+      marginRight: '5%'
+    },
+    centerContainer:{
+      alignItems: 'flex-end'
+    }
   });
 
   export default styles;
