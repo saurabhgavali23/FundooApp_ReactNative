@@ -6,10 +6,10 @@ const styles = StyleSheet.create({
     },
     plusicon: {
       flex: 1,
-      flexDirection: 'column-reverse',
-      alignItems: 'flex-end',
-      marginRight: '5%',
-      marginBottom: '5%',
+      position: 'absolute',
+      bottom: '5%',
+      right: '5%',
+      alignSelf: 'flex-end'
     },
     text: {
       flex: 1,
