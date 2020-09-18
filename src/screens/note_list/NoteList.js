@@ -3,6 +3,7 @@ import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import {getNotes} from '../../services/NoteService';
 import {Card} from 'react-native-elements';
 import styles from './styles';
+import {RNChipView} from 'react-native-chip-view';
 
 const NoteList = ({isList, navigation}) => {
   const [notes, setNotes] = useState([]);
@@ -20,16 +21,35 @@ const NoteList = ({isList, navigation}) => {
   return (
     <ScrollView style={{height: '80%'}}>
       <View style={isList ? styles.container : null}>
-        {notes.map((item, index) => (
-          <Card key={index} containerStyle={[isList?styles.card: null,{backgroundColor: item.color}]}>
-            <TouchableOpacity onPress={()=> navigation.navigate('createNote', {item:item})}>
-            <Text style={styles.titleFont}>{item.title}</Text>
-            <Text style={styles.discriptionFont}>{item.description}</Text>
-            </TouchableOpacity>
-          </Card>
-        ))}
+        {notes.map((item, index) => {
+          let reminder = item.reminder !== undefined ? item.reminder.toString().slice(4, 21) : '';
+          return (
+            <Card
+              key={index}
+              containerStyle={[
+                isList ? styles.card : styles.listStyle,
+                {backgroundColor: item.color},
+              ]}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('createNote', {item: item})}>
+                <Text style={styles.titleFont}>{item.title}</Text>
+                <Text style={styles.discriptionFont}>{item.description}</Text>
+                {reminder !== '' ? (
+                  <View style={styles.reminderFont}>
+                    <RNChipView
+                      title={reminder}
+                      titleStyle={styles.titleStyle}
+                      avatar={false}
+                      height={20}
+                    />
+                  </View>
+                ) : null}
+              </TouchableOpacity>
+            </Card>
+          );
+        })}
       </View>
-      </ScrollView>
+    </ScrollView>
   );
 };
 
