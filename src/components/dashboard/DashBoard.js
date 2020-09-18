@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import {Header} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NoteIcon from 'react-native-vector-icons/AntDesign';
@@ -45,7 +45,7 @@ const DashBoard = ({navigation}) => {
         />
       </View>
       <View>
-      <NoteList isList={isList}/>
+      <NoteList isList={isList} navigation={navigation}/>
       </View>
       <View style={styles.plusicon}>
         <NoteIcon

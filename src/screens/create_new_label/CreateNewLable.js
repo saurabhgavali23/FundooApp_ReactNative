@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import styles from './styles';
 import ArrowLeft from 'react-native-vector-icons/Feather';
@@ -34,7 +34,7 @@ const CreateNewLable = ({navigation}) => {
       <View style={styles.header}>
         <ArrowLeft name="arrow-left" size={32} 
         style={styles.arrow} 
-        onPress={()=> navigation.navigate('createNote',{data: selectedData})}/>
+        onPress={()=> navigation.navigate('createNote',{addLabels: selectedData})}/>
         <TextInput
           placeholder="Create new label"
           style={styles.input}

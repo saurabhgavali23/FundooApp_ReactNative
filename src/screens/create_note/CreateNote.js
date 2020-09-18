@@ -8,7 +8,7 @@ import Pin from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlusBox from 'react-native-vector-icons/Feather';
 import OptionIcon from 'react-native-vector-icons/SimpleLineIcons';
 import Alarm from 'react-native-vector-icons/MaterialCommunityIcons';
-import {saveNotes} from '../../services/NoteService';
+import {saveNotes, updateNotes} from '../../services/NoteService';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CreateNoteFooterRightOptions from '../create_note_footer_right_options/CreateNoteFooterRightOptions';
 import CreateNoteFooterLeftOptions from '../create_note_footer_left_options/CreateNoteFooterLeftOptions';
@@ -18,8 +18,9 @@ import styles from './styles'
 
 const CreateNote = ({navigation, route}) => {
   const refRBSheet = useRef();
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const {addLabels,item} = route.params; 
+  const [title, setTitle] = useState(item!==undefined?item.title:'');
+  const [description, setDescription] = useState(item!==undefined?item.description:'');
   const [optionsToggle, setOptionsToggle] = useState(false)
   const [chipDateTime, setChipDateTime] = useState(null)
   const [showChip, setShowChip] = useState(false)
@@ -27,8 +28,7 @@ const CreateNote = ({navigation, route}) => {
   const [show, setShow] = useState(false)
   const [isArchive, setIsArchive] = useState(false)
   const [isPined, setIsPined] = useState(false)
-  const addLabels = route.params;  
-
+   
     const handleModel = () =>{
       setShowChip(!showChip)
       setShow(false)
@@ -46,6 +46,7 @@ const CreateNote = ({navigation, route}) => {
         formData.append('color', bgColor)
         formData.append('reminder', chipDateTime)
         
+  if(item===undefined){
     saveNotes(formData)
       .then((res) => {
         if (res.status === 200) {
@@ -53,6 +54,19 @@ const CreateNote = ({navigation, route}) => {
         }
       })
       .catch((err) => {});
+    }else{
+      let formData = new FormData()
+        formData.append('title', title)
+        formData.append('description', description)
+        formData.append('noteId', item.id)
+      updateNotes(formData).then((res)=>{
+        if (res.status === 200) {
+          navigation.navigate('drawer');
+        }
+      }).catch((err) => {
+        console.warn("note not update");
+      });
+    }
    };
 
   const handleBottomSheet = (value) =>{

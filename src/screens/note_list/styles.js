@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     card:{
-       width: '45%',
-       marginHorizontal: '2%'
+      width: '46%',
+      marginHorizontal: '2%'
     },
     titleFont:{
         fontSize: 22
@@ -12,9 +12,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     container:{
-        flexDirection: 'row', 
-        flexWrap: 'wrap'
-    }
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
 });
 
 export default styles;
