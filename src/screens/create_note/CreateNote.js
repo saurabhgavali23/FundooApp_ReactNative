@@ -29,20 +29,18 @@ const CreateNote = ({navigation, route}) => {
   const [isArchive, setIsArchive] = useState(false)
   const [isPined, setIsPined] = useState(false)
 
-    const handleModel = () =>{
-      setShowChip(!showChip)
-      setShow(false)
-    }
+  const handleModel = () =>{
+    setShowChip(!showChip)
+    setShow(false)
+  }
 
   var hour = new Date().getHours();
   var min = new Date().getMinutes();
-
+  
   const handleChange = () => {
-    let labelValue = addLabels!== undefined? addLabels.data.toString():''
     let formData = new FormData()
         formData.append('title', title)
         formData.append('description', description)
-        formData.append('label', labelValue)
         formData.append('color', bgColor)
         formData.append('reminder', chipDateTime)
         
@@ -132,7 +130,7 @@ const CreateNote = ({navigation, route}) => {
         {
           addLabels!==undefined ? (
           <RNChipView
-          title={addLabels.data.toString()}
+          title={addLabels.toString()}
           avatar={false}
         />
         ): null}
