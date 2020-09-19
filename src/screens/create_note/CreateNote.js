@@ -18,7 +18,7 @@ import styles from './styles'
 
 const CreateNote = ({navigation, route}) => {
   const refRBSheet = useRef();
-  const {addLabels,item} = route.params; 
+  const {addLabels = undefined, item = undefined} = route.params ?? {};
   const [title, setTitle] = useState(item!==undefined?item.title:'');
   const [description, setDescription] = useState(item!==undefined?item.description:'');
   const [optionsToggle, setOptionsToggle] = useState(false)
@@ -28,7 +28,7 @@ const CreateNote = ({navigation, route}) => {
   const [show, setShow] = useState(false)
   const [isArchive, setIsArchive] = useState(false)
   const [isPined, setIsPined] = useState(false)
-   
+
     const handleModel = () =>{
       setShowChip(!showChip)
       setShow(false)
