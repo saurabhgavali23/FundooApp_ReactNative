@@ -18,11 +18,11 @@ import styles from './styles'
 
 const CreateNote = ({navigation, route}) => {
   const refRBSheet = useRef();
-  const {addLabels = undefined, item = undefined} = route.params ?? {};
+  const {addLabels = undefined, item = undefined, reminder = ''} = route.params ?? {};
   const [title, setTitle] = useState(item!==undefined?item.title:'');
   const [description, setDescription] = useState(item!==undefined?item.description:'');
   const [optionsToggle, setOptionsToggle] = useState(false)
-  const [chipDateTime, setChipDateTime] = useState(null)
+  const [chipDateTime, setChipDateTime] = useState(reminder!==null?reminder:null)
   const [showChip, setShowChip] = useState(false)
   const [bgColor, setBgColor] = useState('#F0FFF0')
   const [show, setShow] = useState(false)
@@ -120,13 +120,13 @@ const CreateNote = ({navigation, route}) => {
         </View>
       <View style={{width:'60%',}}>
         {
-          showChip && (
+          (showChip || reminder !== '') ? (
           <RNChipView
           title={chipDateTime}
           avatar={<Alarm name='alarm' size={20}/>}
           avatarStyle={styles.avatar}
         />
-        )}
+        ):null}
       </View>
       <View style={styles.addLabelChip}>
         {

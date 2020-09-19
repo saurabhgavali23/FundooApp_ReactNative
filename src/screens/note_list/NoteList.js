@@ -31,7 +31,7 @@ const NoteList = ({isList, navigation}) => {
                 {backgroundColor: item.color},
               ]}>
               <TouchableOpacity
-                onPress={() => navigation.navigate('createNote', {item: item})}>
+                onPress={() => navigation.navigate('createNote', {item: item, reminder: reminder})}>
                 <Text style={styles.titleFont}>{item.title}</Text>
                 <Text style={styles.discriptionFont}>{item.description}</Text>
                 {reminder !== '' ? (
