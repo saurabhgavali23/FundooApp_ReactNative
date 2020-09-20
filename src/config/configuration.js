@@ -10,7 +10,7 @@ export const setSnackBarMsg = (message, msgColor) => {
 };
 
 export const isLoggedIn = async() =>{
-  const value = await AsyncStorage.getItem('userId');
+  const value = await AsyncStorage.getItem('userToken');
   if (value != null){
     return true
   }else{

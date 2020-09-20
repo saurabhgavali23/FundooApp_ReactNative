@@ -34,7 +34,7 @@ export const sendEmail = (Email) =>{
     let Data ={
         email: Email
     }
-     var token = AsyncStorage.getItem('userId')
+     var token = AsyncStorage.getItem('userToken')
     return axios.post(
         Config.REACT_APP_BASE_URL+NoteApi.userReset,
         Data,{

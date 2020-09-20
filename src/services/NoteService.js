@@ -7,7 +7,7 @@ const URL = Config.REACT_APP_BASE_URL;
 
 export const saveNotes = async (data) => {  
 
-    var token = await AsyncStorage.getItem('userId')
+    var token = await AsyncStorage.getItem('userToken')
     return axios.post(
         URL+NoteApi.addNotes,
         data,{
@@ -20,7 +20,7 @@ export const saveNotes = async (data) => {
 
 export const getNotes = async () => {
 
-    var token = await AsyncStorage.getItem('userId')
+    var token = await AsyncStorage.getItem('userToken')
     return axios.get(
         URL+NoteApi.getNotes,
         {
@@ -33,7 +33,7 @@ export const getNotes = async () => {
 
 export const updateNotes = async (data) =>{
     
-    var token = await AsyncStorage.getItem('userId')
+    var token = await AsyncStorage.getItem('userToken')
     return axios.post(
         URL+NoteApi.updateNotes,data,{
             headers:{

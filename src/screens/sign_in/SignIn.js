@@ -21,8 +21,9 @@ export const SignIn = ({navigation}) => {
     login(Email, Password)
       .then( (res) => {
       try{
-        let userId = res.data.id
-        AsyncStorage.multiSet([['userId', userId],['userData', JSON.stringify(res.data)]])
+        let userToken = res.data.id
+        let userId = res.data.userId
+        AsyncStorage.multiSet([['userToken', userToken],['userData', JSON.stringify(res.data)],['userId', userId]])
       }catch(error){console.warn(error)}
         setIsLoading(false)
         setSnackBarMsg('Login Sucessfull','green');
