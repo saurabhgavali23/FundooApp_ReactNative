@@ -8,7 +8,7 @@ import Pin from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlusBox from 'react-native-vector-icons/Feather';
 import OptionIcon from 'react-native-vector-icons/SimpleLineIcons';
 import Alarm from 'react-native-vector-icons/MaterialCommunityIcons';
-import {saveNoteLabels, saveNotes, updateNotes} from '../../services/NoteService';
+import {pinUnPinNotes, saveNoteLabels, saveNotes, updateNotes} from '../../services/NoteService';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CreateNoteFooterRightOptions from '../create_note_footer_right_options/CreateNoteFooterRightOptions';
 import CreateNoteFooterLeftOptions from '../create_note_footer_left_options/CreateNoteFooterLeftOptions';
@@ -28,8 +28,10 @@ const CreateNote = ({navigation, route}) => {
   const [bgColor, setBgColor] = useState(item!=undefined?item.color:'#F0FFF0')
   const [show, setShow] = useState(false)
   const [isArchive, setIsArchive] = useState(false)
-  const [isPined, setIsPined] = useState(false)
+  const [isPined, setIsPined] = useState(item!==undefined?item.isPined:false)
   const [labelId, setLabelId] = useState([])
+  let noteId = []
+  noteId.push(item.id)
   
   useEffect(() => {
     AsyncStorage.getItem('userId').then(res=>{
@@ -59,6 +61,17 @@ const CreateNote = ({navigation, route}) => {
 
   var hour = new Date().getHours();
   var min = new Date().getMinutes();
+
+  const isPinOrUnPin = () =>{
+        let data = {
+          isPined: isPined,
+          noteIdList: noteId
+        }
+        pinUnPinNotes(data).then((res)=>{
+        }).catch(err=>{
+          console.warn("error", err);
+        })
+  }
   
   const handleChange = () => {
   let formData = new FormData()
@@ -89,6 +102,7 @@ const CreateNote = ({navigation, route}) => {
       }).catch((err) => {
         console.warn("note not update");
       });
+      isPinOrUnPin()
     }
    };
 

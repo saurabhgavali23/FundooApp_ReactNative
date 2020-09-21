@@ -56,3 +56,16 @@ export const saveNoteLabels = async (data) => {
         }
     ) 
 }
+
+export const pinUnPinNotes = async (data) => {
+
+    var token = await AsyncStorage.getItem('userToken')
+    return axios.post(
+        URL+NoteApi.pinUnpinNotes,
+        data,{
+            headers:{
+                Authorization : token
+            }
+        }
+    )
+}

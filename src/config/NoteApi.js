@@ -5,7 +5,8 @@ const NoteApi = {
   userLogin: '/user/login',
   userReset: '/user/reset',
   updateNotes: '/notes/updateNotes',
-  saveNoteLabels: '/noteLabels'
+  saveNoteLabels: '/noteLabels',
+  pinUnpinNotes: '/notes/pinUnpinNotes'
 };
 
 export default NoteApi;
