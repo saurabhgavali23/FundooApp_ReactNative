@@ -8,7 +8,7 @@ import Pin from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlusBox from 'react-native-vector-icons/Feather';
 import OptionIcon from 'react-native-vector-icons/SimpleLineIcons';
 import Alarm from 'react-native-vector-icons/MaterialCommunityIcons';
-import {pinUnPinNotes, saveNoteLabels, saveNotes, updateNotes} from '../../services/NoteService';
+import {pinUnPinNotes, saveNoteLabels, saveNotes, setNoteColor, updateNotes} from '../../services/NoteService';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CreateNoteFooterRightOptions from '../create_note_footer_right_options/CreateNoteFooterRightOptions';
 import CreateNoteFooterLeftOptions from '../create_note_footer_left_options/CreateNoteFooterLeftOptions';
@@ -72,6 +72,17 @@ const CreateNote = ({navigation, route}) => {
           console.warn("error", err);
         })
   }
+
+  const updateNoteColor = () => {
+    let data = {
+      color: bgColor,
+      noteIdList: noteId
+    }
+    setNoteColor(data).then(res=>{})
+    .catch(err=>{
+      console.warn("error", err);
+    })
+  }
   
   const handleChange = () => {
   let formData = new FormData()
@@ -103,6 +114,7 @@ const CreateNote = ({navigation, route}) => {
         console.warn("note not update");
       });
       isPinOrUnPin()
+      updateNoteColor()
     }
    };
 

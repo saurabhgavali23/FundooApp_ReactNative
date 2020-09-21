@@ -69,3 +69,16 @@ export const pinUnPinNotes = async (data) => {
         }
     )
 }
+
+export const setNoteColor = async (data) => {
+
+    var token = await AsyncStorage.getItem('userToken')
+    return axios.post(
+        URL+NoteApi.NoteColor,
+        data,{
+            headers:{
+                Authorization : token
+            }
+        }
+    )
+}

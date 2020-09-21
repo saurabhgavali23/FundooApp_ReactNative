@@ -6,7 +6,8 @@ const NoteApi = {
   userReset: '/user/reset',
   updateNotes: '/notes/updateNotes',
   saveNoteLabels: '/noteLabels',
-  pinUnpinNotes: '/notes/pinUnpinNotes'
+  pinUnpinNotes: '/notes/pinUnpinNotes',
+  NoteColor: '/notes/changesColorNotes'
 };
 
 export default NoteApi;
