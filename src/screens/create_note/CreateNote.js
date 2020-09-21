@@ -25,7 +25,7 @@ const CreateNote = ({navigation, route}) => {
   const [optionsToggle, setOptionsToggle] = useState(false)
   const [chipDateTime, setChipDateTime] = useState(reminder!==null?reminder:null)
   const [showChip, setShowChip] = useState(false)
-  const [bgColor, setBgColor] = useState('#F0FFF0')
+  const [bgColor, setBgColor] = useState(item!=undefined?item.color:'#F0FFF0')
   const [show, setShow] = useState(false)
   const [isArchive, setIsArchive] = useState(false)
   const [isPined, setIsPined] = useState(false)
