@@ -29,6 +29,16 @@ const styles = StyleSheet.create({
     titleStyle:{
         fontSize:15,
     },
+    pin:{
+        fontSize: 20, 
+        marginLeft: '4%', 
+        marginTop: '1%'
+    },
+    other:{
+        fontSize: 20, 
+        marginLeft: '4%', 
+        marginTop: '2%'
+    }
 });
 
 export default styles;
