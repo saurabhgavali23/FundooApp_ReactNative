@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {View, TextInput, StatusBar, Text, TouchableOpacity, Modal} from 'react-native';
 import {Header, Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -8,13 +8,14 @@ import Pin from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlusBox from 'react-native-vector-icons/Feather';
 import OptionIcon from 'react-native-vector-icons/SimpleLineIcons';
 import Alarm from 'react-native-vector-icons/MaterialCommunityIcons';
-import {saveNotes, updateNotes} from '../../services/NoteService';
+import {saveNoteLabels, saveNotes, updateNotes} from '../../services/NoteService';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CreateNoteFooterRightOptions from '../create_note_footer_right_options/CreateNoteFooterRightOptions';
 import CreateNoteFooterLeftOptions from '../create_note_footer_left_options/CreateNoteFooterLeftOptions';
 import Reminder from '../reminder/Reminder';
 import {RNChipView} from 'react-native-chip-view'
 import styles from './styles'
+import AsyncStorage from '@react-native-community/async-storage';
 
 const CreateNote = ({navigation, route}) => {
   const refRBSheet = useRef();
@@ -28,6 +29,27 @@ const CreateNote = ({navigation, route}) => {
   const [show, setShow] = useState(false)
   const [isArchive, setIsArchive] = useState(false)
   const [isPined, setIsPined] = useState(false)
+  const [labelId, setLabelId] = useState([])
+  
+  useEffect(() => {
+    AsyncStorage.getItem('userId').then(res=>{
+     var userId = res;
+      
+    if(addLabels!==undefined){
+      let data={
+        label : addLabels.toString(),
+        isDeleted: false,
+        userId: userId
+      }
+      console.log("data11", data);
+      saveNoteLabels(data).then(res=>{
+        setLabelId( res.data.id)  
+      }).catch(err=>{
+        console.warn("error", err);
+      })
+    }
+  })
+  }, [addLabels])
 
   const handleModel = () =>{
     setShowChip(!showChip)
@@ -38,12 +60,13 @@ const CreateNote = ({navigation, route}) => {
   var min = new Date().getMinutes();
   
   const handleChange = () => {
-    let formData = new FormData()
-        formData.append('title', title)
-        formData.append('description', description)
-        formData.append('color', bgColor)
-        formData.append('reminder', chipDateTime)
-        
+  let formData = new FormData()
+      formData.append('title', title)
+      formData.append('description', description)
+      formData.append('color', bgColor)
+      formData.append('labelIdList', labelId)
+      formData.append('reminder', chipDateTime)
+      
   if(item===undefined){
     saveNotes(formData)
       .then((res) => {

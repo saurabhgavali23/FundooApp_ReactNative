@@ -31,14 +31,28 @@ export const getNotes = async () => {
     )
 }
 
-export const updateNotes = async (data) =>{
+export const updateNotes = async (data) => {
     
     var token = await AsyncStorage.getItem('userToken')
     return axios.post(
-        URL+NoteApi.updateNotes,data,{
+        URL+NoteApi.updateNotes,
+        data,{
             headers:{
                 Authorization : token
             }
         }
     )
+}
+
+export const saveNoteLabels = async (data) => {
+
+    var token = await AsyncStorage.getItem('userToken')
+    return axios.post(
+        URL+NoteApi.saveNoteLabels,
+        data,{
+            headers:{
+                Authorization : token
+            }
+        }
+    ) 
 }
