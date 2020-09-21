@@ -44,6 +44,20 @@ const NoteList = ({isList, navigation}) => {
                     />
                   </View>
                 ) : null}
+                <View>
+                {
+                  item.noteLabels.map((value,index)=>(
+                    <View key={index} style={{width: '40%'}}>
+                    <RNChipView
+                      title={value.label}
+                      titleStyle={styles.titleStyle}
+                      avatar={false}
+                      height={20}
+                    />
+                  </View>  
+                 ))
+                }
+                </View>
               </TouchableOpacity>
             </Card>
           );

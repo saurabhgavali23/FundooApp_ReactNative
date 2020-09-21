@@ -41,9 +41,10 @@ const CreateNote = ({navigation, route}) => {
         isDeleted: false,
         userId: userId
       }
-      console.log("data11", data);
       saveNoteLabels(data).then(res=>{
-        setLabelId( res.data.id)  
+        var label12 = [];
+         label12.push(res.data.id)
+         setLabelId(label12) 
       }).catch(err=>{
         console.warn("error", err);
       })
@@ -64,9 +65,8 @@ const CreateNote = ({navigation, route}) => {
       formData.append('title', title)
       formData.append('description', description)
       formData.append('color', bgColor)
-      formData.append('labelIdList', labelId)
+      formData.append('labelIdList', JSON.stringify(labelId))
       formData.append('reminder', chipDateTime)
-      
   if(item===undefined){
     saveNotes(formData)
       .then((res) => {
