@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {getNotes} from '../../services/NoteService';
 import {Card} from 'react-native-elements';
 import styles from './styles';
@@ -9,8 +9,12 @@ const NoteList = ({isList, navigation}) => {
 
   const [isPined, setIsPined] = useState(true)
   const [notes, setNotes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    setTimeout(()=>{
+      setIsLoading(false)
+    },1000)
     getNotes()
       .then((res) => {
         let data = res.data.data.data;
@@ -20,6 +24,14 @@ const NoteList = ({isList, navigation}) => {
         console.warn('something wrong');
       });
   }, []);
+
+  if (isLoading){
+    return(
+    <View style={{flex: 1, marginTop: '90%'}}>
+      <ActivityIndicator size='large' color='green'/>
+    </View>
+    )
+  }
 
   const noteLists = (item, index) =>{
     let reminder = item.reminder !== undefined ? item.reminder.toString().slice(4, 21) : '';
