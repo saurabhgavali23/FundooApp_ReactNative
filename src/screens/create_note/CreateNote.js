@@ -65,6 +65,8 @@ const CreateNote = ({navigation, route}) => {
       formData.append('title', title)
       formData.append('description', description)
       formData.append('color', bgColor)
+      formData.append('isPined', isPined)
+      formData.append('isArchive', isArchive)
       formData.append('labelIdList', JSON.stringify(labelId))
       formData.append('reminder', chipDateTime)
   if(item===undefined){
