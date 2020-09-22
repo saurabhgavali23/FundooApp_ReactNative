@@ -10,11 +10,9 @@ const NoteList = ({isList, navigation}) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
     getNotes()
       .then((res) => {
+        setIsLoading(false);
         let data = res.data.data.data;
         setNotes(data);
       })
