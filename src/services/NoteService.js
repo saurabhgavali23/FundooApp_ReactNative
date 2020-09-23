@@ -95,3 +95,16 @@ export const setArchiveNote = async (data) => {
         }
     )
 }
+
+export const trashNotes = async (data) => {
+
+    var token = await AsyncStorage.getItem('userToken')
+    return axios.post(
+        URL+NoteApi.TrashNotes,
+        data,{
+            headers:{
+                Authorization : token
+            }
+        }
+    )
+}

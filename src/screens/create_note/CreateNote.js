@@ -230,7 +230,7 @@ const CreateNote = ({navigation, route}) => {
           >
             {optionsToggle?
             <CreateNoteFooterLeftOptions/> :
-            <CreateNoteFooterRightOptions setBgColor={setBgColor} navigation={navigation}/>
+            <CreateNoteFooterRightOptions setBgColor={setBgColor} navigation={navigation} noteId={noteId}/>
             }
           </RBSheet>
       </View>
