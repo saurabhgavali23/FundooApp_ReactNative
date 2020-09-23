@@ -4,7 +4,7 @@ import {getNotes} from '../../services/NoteService';
 import styles from './styles';
 import DisplayCard from './DispalyCard';
 
-const NoteList = ({isList, navigation, isReminderList, isArchive}) => {
+const NoteList = ({isList, navigation, isReminderList, isArchive, isDeleted}) => {
   const [isPined, setIsPined] = useState(true);
   const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -97,6 +97,22 @@ const NoteList = ({isList, navigation, isReminderList, isArchive}) => {
                   item={item}
                   isList={isList}
                   navigation={navigation}
+                />
+              )
+            )
+          })}
+      </View>
+      <View style={isList ? styles.container : null}>
+        {notes.map(
+          (item, index) =>{
+            return(
+              (item.isDeleted === true && isDeleted === true) && (
+                <DisplayCard
+                  key={index}
+                  item={item}
+                  isList={isList}
+                  navigation={navigation}
+                  showDeleteOptions={true}
                 />
               )
             )

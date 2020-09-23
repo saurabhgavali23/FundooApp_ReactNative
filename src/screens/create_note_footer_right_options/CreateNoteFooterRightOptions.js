@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import Share from 'react-native-vector-icons/AntDesign';
 import Copy from 'react-native-vector-icons/Ionicons';
 import Labels from 'react-native-vector-icons/MaterialCommunityIcons';
 import Delete from 'react-native-vector-icons/AntDesign';
+import Restore from 'react-native-vector-icons/MaterialIcons';
 import ColorList from '../color_list/ColorList';
 import styles from './styles'
 import { trashNotes } from '../../services/NoteService'
 
-const CreateNoteFooterRightOptions = ({setBgColor, navigation, noteId}) => {
+const CreateNoteFooterRightOptions = ({setBgColor, navigation, noteId, showDeleteOptions}) => {
 
   const trashNote = (value) => {
     if(noteId !== null){
@@ -26,6 +27,8 @@ const CreateNoteFooterRightOptions = ({setBgColor, navigation, noteId}) => {
   
   return (
     <View style={styles.container}>
+      {showDeleteOptions!== true?(
+      <View>
       <TouchableOpacity style={styles.option}
       onPress={()=> trashNote(true)}>
         <Delete name="delete" size={25} />
@@ -46,6 +49,20 @@ const CreateNoteFooterRightOptions = ({setBgColor, navigation, noteId}) => {
       <View>
         <ColorList setBgColor={setBgColor} />
       </View>
+      </View>): 
+      (<View>
+        <TouchableOpacity style={styles.option}
+          onPress={()=> trashNote(false)}>
+          <Restore name="restore" size={25} />
+          <Text style={styles.text}>Restore</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.option}
+          onPress={()=> trashNote(false)}>
+          <Delete name="delete" size={25} />
+          <Text style={styles.text}>Perment Delete</Text>
+        </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };

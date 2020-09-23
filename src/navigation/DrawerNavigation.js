@@ -13,7 +13,7 @@ const Drawer = createDrawerNavigator();
 const DrawerNavigation = ({navigation}) => {
   const [isReminderList, setIsReminderList] = useState(true)
   const [isArchive, setIsArchive] = useState(true)
-  
+  const [isDeleted, setIsDeleted] = useState(true)
     return (
         <Drawer.Navigator initialRouteName="dashBoard">
             <Drawer.Screen
@@ -25,7 +25,8 @@ const DrawerNavigation = ({navigation}) => {
                   <Text style={{fontSize: 18, textAlign: 'left'}}
                   onPress={()=> navigation.navigate('dashBoard',
                   { isReminderList: !isReminderList, 
-                    isArchive: !isArchive
+                    isArchive: !isArchive,
+                    isDeleted: !isDeleted
                   })}>
                     Notes
                   </Text>
@@ -43,7 +44,8 @@ const DrawerNavigation = ({navigation}) => {
                   <Text style={{fontSize: 18, textAlign: 'left'}}
                     onPress={()=> navigation.navigate('dashBoard',
                     { isReminderList: isReminderList, 
-                      isArchive: !isArchive
+                      isArchive: !isArchive,
+                      isDeleted: !isDeleted
                     })}>
                     Reminder
                   </Text>
@@ -61,7 +63,8 @@ const DrawerNavigation = ({navigation}) => {
                   <Text style={{fontSize: 18, textAlign: 'left'}}
                   onPress={()=> navigation.navigate('dashBoard',
                   { isReminderList: !isReminderList, 
-                    isArchive: isArchive
+                    isArchive: isArchive,
+                    isDeleted: !isDeleted
                   })}>
                     Archive
                   </Text>
@@ -75,7 +78,12 @@ const DrawerNavigation = ({navigation}) => {
               component={DashBoard}
               options={{
                 drawerLabel: () => (
-                  <Text style={{fontSize: 18, textAlign: 'left'}}>
+                  <Text style={{fontSize: 18, textAlign: 'left'}}
+                  onPress={()=> navigation.navigate('dashBoard',
+                  { isReminderList: !isReminderList, 
+                    isArchive: isArchive,
+                    isDeleted: isDeleted
+                  })}>
                     Trash
                   </Text>
                 ),

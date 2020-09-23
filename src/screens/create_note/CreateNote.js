@@ -19,7 +19,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const CreateNote = ({navigation, route}) => {
   const refRBSheet = useRef();
-  const {addLabels = undefined, item = undefined, reminder = ''} = route.params ?? {};
+  const {addLabels = undefined, item = undefined, reminder = '', showDeleteOptions = false} = route.params ?? {};
   const [title, setTitle] = useState(item!==undefined?item.title:'');
   const [description, setDescription] = useState(item!==undefined?item.description:'');
   const [optionsToggle, setOptionsToggle] = useState(false)
@@ -230,7 +230,11 @@ const CreateNote = ({navigation, route}) => {
           >
             {optionsToggle?
             <CreateNoteFooterLeftOptions/> :
-            <CreateNoteFooterRightOptions setBgColor={setBgColor} navigation={navigation} noteId={noteId}/>
+            <CreateNoteFooterRightOptions 
+            setBgColor={setBgColor} 
+            navigation={navigation} 
+            noteId={noteId}
+            showDeleteOptions={showDeleteOptions}/>
             }
           </RBSheet>
       </View>
