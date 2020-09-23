@@ -4,7 +4,7 @@ import {getNotes} from '../../services/NoteService';
 import styles from './styles';
 import DisplayCard from './DispalyCard';
 
-const NoteList = ({isList, navigation, isReminderList}) => {
+const NoteList = ({isList, navigation, isReminderList, isArchive}) => {
   const [isPined, setIsPined] = useState(true);
   const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,12 +31,12 @@ const NoteList = ({isList, navigation, isReminderList}) => {
   
   return (
     <ScrollView style={{height: '80%'}}>
-      {isPined !== isReminderList && <Text style={styles.pin}>Pined</Text>}
+      {(isPined !== isReminderList && !isArchive) && <Text style={styles.pin}>Pined</Text>}
       <View style={isList ? styles.container : null}>
         {notes.map(
           (item, index) =>{
             return(
-              (item.isPined === true && isReminderList === false)? (
+              (item.isPined === true && isReminderList === false && isArchive === false)? (
                 <DisplayCard
                   key={index}
                   item={item}
@@ -47,11 +47,11 @@ const NoteList = ({isList, navigation, isReminderList}) => {
             )
             })}
       </View>
-      {isPined !== isReminderList && <Text style={styles.other}>Other</Text>}
+      {(isPined !== isReminderList && !isArchive) && <Text style={styles.other}>Other</Text>}
       <View style={isList ? styles.container : null}>
         {notes.map(
           (item, index) =>
-            (item.isPined === false && isReminderList === false) && (
+            (item.isPined === false && isReminderList === false && isArchive === false) && (
               <DisplayCard
                 key={index}
                 item={item}
@@ -65,7 +65,22 @@ const NoteList = ({isList, navigation, isReminderList}) => {
         {notes.map(
           (item, index) =>{
             return(
-              (item.reminder.length !== 0 && isReminderList === true) && (
+              (item.reminder.length !== 0 && isReminderList === true && isArchive === false) && (
+                <DisplayCard
+                  key={index}
+                  item={item}
+                  isList={isList}
+                  navigation={navigation}
+                />
+              )
+            )
+          })}
+      </View>
+      <View style={isList ? styles.container : null}>
+        {notes.map(
+          (item, index) =>{
+            return(
+              (item.isArchived !== false && isArchive === true) && (
                 <DisplayCard
                   key={index}
                   item={item}
