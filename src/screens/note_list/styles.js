@@ -18,8 +18,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
-    reminderFont:{
-        width: '50%',
+    reminderAndLabelContainer:{
+        alignSelf: 'flex-start',
+        borderRadius: 20,
+        borderWidth: 0.5,
+        marginBottom: '1%'
     },
     listStyle:{
         borderRadius: 10,
@@ -28,6 +31,7 @@ const styles = StyleSheet.create({
     },
     titleStyle:{
         fontSize:15,
+        marginHorizontal: '2%'
     },
     pin:{
         fontSize: 20, 
