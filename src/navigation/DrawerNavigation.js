@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import DashBoard from '../components/dashboard/DashBoard';
 import NoteIcon from 'react-native-vector-icons/Entypo';
 import ReminderIocn from 'react-native-vector-icons/FontAwesome';
-import Reminder from '../screens/reminder/Reminder';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Text} from 'react-native';
 import CreateNewLable from '../screens/create_new_label/CreateNewLable'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const Drawer = createDrawerNavigator();
 
-const DrawerNavigation = () => {
+const DrawerNavigation = ({navigation}) => {
+  const [isReminderList, setIsReminderList] = useState(true)
+
     return (
         <Drawer.Navigator initialRouteName="dashBoard">
             <Drawer.Screen
@@ -17,19 +19,27 @@ const DrawerNavigation = () => {
               component={DashBoard}
               options={{
                 drawerLabel: () => (
-                  <Text style={{fontSize: 18, textAlign: 'left'}}>Notes</Text>
+                  <TouchableOpacity>
+                  <Text style={{fontSize: 18, textAlign: 'left'}}
+                  onPress={()=> navigation.navigate('dashBoard',{ isReminderList: !isReminderList })}>
+                    Notes
+                  </Text>
+                  </TouchableOpacity>
                 ),
                 drawerIcon: () => <NoteIcon name="light-bulb" size={18} />,
               }}
             />
             <Drawer.Screen
               name="reminder"
-              component={Reminder}
+              component={DashBoard}
               options={{
                 drawerLabel: () => (
-                  <Text style={{fontSize: 18, textAlign: 'left'}}>
+                  <TouchableOpacity>
+                  <Text style={{fontSize: 18, textAlign: 'left'}}
+                    onPress={()=> navigation.navigate('dashBoard',{ isReminderList: isReminderList })}>
                     Reminder
                   </Text>
+                  </TouchableOpacity>
                 ),
                 drawerIcon: () => <ReminderIocn name="bell-o" size={18} />,
               }}

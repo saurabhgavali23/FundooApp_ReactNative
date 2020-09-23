@@ -10,10 +10,11 @@ import styles from './styles'
 import NoteList from '../../screens/note_list/NoteList';
 import NoteViewIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-const DashBoard = ({navigation}) => {
-
+const DashBoard = ({navigation, route}) => {
+  const { isReminderList = false } = route.params || {}
   const refRBSheet = useRef();
   const [isList, setIsList] = useState(false)
+  
   return (
     <View style={styles.container}>
       <View>
@@ -45,7 +46,7 @@ const DashBoard = ({navigation}) => {
         />
       </View>
       <View>
-      <NoteList isList={isList} navigation={navigation}/>
+      <NoteList isList={isList} navigation={navigation} isReminderList={isReminderList}/>
       </View>
       <View style={styles.plusicon}>
         <NoteIcon

@@ -4,7 +4,7 @@ import {getNotes} from '../../services/NoteService';
 import styles from './styles';
 import DisplayCard from './DispalyCard';
 
-const NoteList = ({isList, navigation}) => {
+const NoteList = ({isList, navigation, isReminderList}) => {
   const [isPined, setIsPined] = useState(true);
   const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,14 +28,30 @@ const NoteList = ({isList, navigation}) => {
       </View>
     );
   }
-
+  
   return (
     <ScrollView style={{height: '80%'}}>
-      {isPined && <Text style={styles.pin}>Pined</Text>}
+      {isPined !== isReminderList && <Text style={styles.pin}>Pined</Text>}
+      <View style={isList ? styles.container : null}>
+        {notes.map(
+          (item, index) =>{
+            return(
+              (item.isPined === true && isReminderList === false)? (
+                <DisplayCard
+                  key={index}
+                  item={item}
+                  isList={isList}
+                  navigation={navigation}
+                />
+              ):null
+            )
+            })}
+      </View>
+      {isPined !== isReminderList && <Text style={styles.other}>Other</Text>}
       <View style={isList ? styles.container : null}>
         {notes.map(
           (item, index) =>
-            item.isPined === true && (
+            (item.isPined === false && isReminderList === false) && (
               <DisplayCard
                 key={index}
                 item={item}
@@ -45,19 +61,20 @@ const NoteList = ({isList, navigation}) => {
             ),
         )}
       </View>
-      {isPined && <Text style={styles.other}>Other</Text>}
       <View style={isList ? styles.container : null}>
         {notes.map(
-          (item, index) =>
-            item.isPined === false && (
-              <DisplayCard
-                key={index}
-                item={item}
-                isList={isList}
-                navigation={navigation}
-              />
-            ),
-        )}
+          (item, index) =>{
+            return(
+              (item.reminder.length !== 0 && isReminderList === true) && (
+                <DisplayCard
+                  key={index}
+                  item={item}
+                  isList={isList}
+                  navigation={navigation}
+                />
+              )
+            )
+          })}
       </View>
     </ScrollView>
   );
