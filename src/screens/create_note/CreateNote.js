@@ -8,7 +8,7 @@ import Pin from 'react-native-vector-icons/MaterialCommunityIcons';
 import PlusBox from 'react-native-vector-icons/Feather';
 import OptionIcon from 'react-native-vector-icons/SimpleLineIcons';
 import Alarm from 'react-native-vector-icons/MaterialCommunityIcons';
-import {pinUnPinNotes, saveNoteLabels, saveNotes, setNoteColor, updateNotes} from '../../services/NoteService';
+import {pinUnPinNotes, saveNoteLabels, saveNotes, setNoteColor, updateNotes, setArchiveNote} from '../../services/NoteService';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CreateNoteFooterRightOptions from '../create_note_footer_right_options/CreateNoteFooterRightOptions';
 import CreateNoteFooterLeftOptions from '../create_note_footer_left_options/CreateNoteFooterLeftOptions';
@@ -27,7 +27,7 @@ const CreateNote = ({navigation, route}) => {
   const [showChip, setShowChip] = useState(false)
   const [bgColor, setBgColor] = useState(item!=undefined?item.color:'#F0FFF0')
   const [show, setShow] = useState(false)
-  const [isArchive, setIsArchive] = useState(false)
+  const [isArchive, setIsArchive] = useState(item!=undefined?item.isArchived:false)
   const [isPined, setIsPined] = useState(item!==undefined?item.isPined:false)
   const [labelId, setLabelId] = useState([])
   let noteId = []
@@ -62,15 +62,16 @@ const CreateNote = ({navigation, route}) => {
   var hour = new Date().getHours();
   var min = new Date().getMinutes();
 
-  const isPinOrUnPin = () =>{
-        let data = {
-          isPined: isPined,
-          noteIdList: noteId
-        }
-        pinUnPinNotes(data).then((res)=>{
-        }).catch(err=>{
-          console.warn("error", err);
-        })
+  const isPinOrUnPin = (value) =>{
+    setIsPined(value)
+    let data = {
+      isPined: value,
+      noteIdList: noteId
+    }
+   pinUnPinNotes(data).then((res)=>{
+    }).catch(err=>{
+      console.warn("error", err);
+    })
   }
 
   const updateNoteColor = () => {
@@ -78,7 +79,20 @@ const CreateNote = ({navigation, route}) => {
       color: bgColor,
       noteIdList: noteId
     }
-    setNoteColor(data).then(res=>{})
+   setNoteColor(data).then(res=>{})
+    .catch(err=>{
+      console.warn("error", err);
+    })
+  }
+
+  const updateArchivedNote = (value) => {
+    setIsArchive(value)
+    let data = {
+      isArchived: value,
+      noteIdList: noteId 
+    }
+   setArchiveNote(data).then(res=>{
+  })
     .catch(err=>{
       console.warn("error", err);
     })
@@ -113,7 +127,6 @@ const CreateNote = ({navigation, route}) => {
       }).catch((err) => {
         console.warn("note not update");
       });
-      isPinOrUnPin()
       updateNoteColor()
     }
    };
@@ -137,13 +150,13 @@ const CreateNote = ({navigation, route}) => {
         }
         rightComponent={
           <View style={styles.headOpetions}>
-            <TouchableOpacity onPress={()=> setIsPined(!isPined)}>
+            <TouchableOpacity onPress={()=> isPinOrUnPin(!isPined)}>
             <Pin name={isPined? 'pin':'pin-outline'} size={25} />
             </TouchableOpacity>
             <TouchableOpacity onPress={()=> setShow(true)}>
             <Bell name="bell-o" size={25} style={{marginLeft: '40%'}}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=> setIsArchive(!isArchive)}>
+            <TouchableOpacity onPress={()=> updateArchivedNote(!isArchive)}>
             <Archive name={isArchive?'archive':'archive-outline'} size={25} style={{marginLeft: '28%'}}/>
             </TouchableOpacity>
           </View>

@@ -82,3 +82,16 @@ export const setNoteColor = async (data) => {
         }
     )
 }
+
+export const setArchiveNote = async (data) => {
+
+    var token = await AsyncStorage.getItem('userToken')
+    return axios.post(
+        URL+NoteApi.ArchiveNote,
+        data,{
+            headers:{
+                Authorization : token
+            }
+        }
+    )
+}
