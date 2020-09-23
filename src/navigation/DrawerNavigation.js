@@ -23,7 +23,10 @@ const DrawerNavigation = ({navigation}) => {
                 drawerLabel: () => (
                   <TouchableOpacity>
                   <Text style={{fontSize: 18, textAlign: 'left'}}
-                  onPress={()=> navigation.navigate('dashBoard',{ isReminderList: !isReminderList, isArchive: !isArchive })}>
+                  onPress={()=> navigation.navigate('dashBoard',
+                  { isReminderList: !isReminderList, 
+                    isArchive: !isArchive
+                  })}>
                     Notes
                   </Text>
                   </TouchableOpacity>
@@ -38,7 +41,10 @@ const DrawerNavigation = ({navigation}) => {
                 drawerLabel: () => (
                   <TouchableOpacity>
                   <Text style={{fontSize: 18, textAlign: 'left'}}
-                    onPress={()=> navigation.navigate('dashBoard',{ isReminderList: isReminderList, isArchive: !isArchive })}>
+                    onPress={()=> navigation.navigate('dashBoard',
+                    { isReminderList: isReminderList, 
+                      isArchive: !isArchive
+                    })}>
                     Reminder
                   </Text>
                   </TouchableOpacity>
@@ -53,7 +59,10 @@ const DrawerNavigation = ({navigation}) => {
                 drawerLabel: () => (
                   <TouchableOpacity>
                   <Text style={{fontSize: 18, textAlign: 'left'}}
-                  onPress={()=> navigation.navigate('dashBoard',{ isReminderList: !isReminderList, isArchive: isArchive })}>
+                  onPress={()=> navigation.navigate('dashBoard',
+                  { isReminderList: !isReminderList, 
+                    isArchive: isArchive
+                  })}>
                     Archive
                   </Text>
                   </TouchableOpacity>

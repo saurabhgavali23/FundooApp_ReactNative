@@ -36,7 +36,10 @@ const NoteList = ({isList, navigation, isReminderList, isArchive}) => {
         {notes.map(
           (item, index) =>{
             return(
-              (item.isPined === true && isReminderList === false && isArchive === false)? (
+              (item.isPined === true && 
+                isReminderList === false && 
+                isArchive === false && 
+                item.isDeleted === false)? (
                 <DisplayCard
                   key={index}
                   item={item}
@@ -51,7 +54,10 @@ const NoteList = ({isList, navigation, isReminderList, isArchive}) => {
       <View style={isList ? styles.container : null}>
         {notes.map(
           (item, index) =>
-            (item.isPined === false && isReminderList === false && isArchive === false) && (
+            (item.isPined === false && 
+              isReminderList === false && 
+              isArchive === false &&
+              item.isDeleted === false) && (
               <DisplayCard
                 key={index}
                 item={item}
@@ -65,7 +71,10 @@ const NoteList = ({isList, navigation, isReminderList, isArchive}) => {
         {notes.map(
           (item, index) =>{
             return(
-              (item.reminder.length !== 0 && isReminderList === true && isArchive === false) && (
+              (item.reminder.length !== 0 && 
+                isReminderList === true && 
+                isArchive === false && 
+                item.isDeleted === false) && (
                 <DisplayCard
                   key={index}
                   item={item}
@@ -80,7 +89,9 @@ const NoteList = ({isList, navigation, isReminderList, isArchive}) => {
         {notes.map(
           (item, index) =>{
             return(
-              (item.isArchived !== false && isArchive === true) && (
+              (item.isArchived !== false && 
+                isArchive === true &&
+                item.isDeleted === false) && (
                 <DisplayCard
                   key={index}
                   item={item}

@@ -46,7 +46,11 @@ const DashBoard = ({navigation, route}) => {
         />
       </View>
       <View>
-      <NoteList isList={isList} navigation={navigation} isReminderList={isReminderList} isArchive={isArchive}/>
+      <NoteList isList={isList} 
+      navigation={navigation} 
+      isReminderList={isReminderList} 
+      isArchive={isArchive}
+      />
       </View>
       <View style={styles.plusicon}>
         <NoteIcon
