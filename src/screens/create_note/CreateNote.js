@@ -31,7 +31,7 @@ const CreateNote = ({navigation, route}) => {
   const [isPined, setIsPined] = useState(item!==undefined?item.isPined:false)
   const [labelId, setLabelId] = useState([])
   let noteId = []
-  noteId.push(item.id)
+  noteId.push(item!==undefined?item.id:null)
   
   useEffect(() => {
     AsyncStorage.getItem('userId').then(res=>{
@@ -64,14 +64,16 @@ const CreateNote = ({navigation, route}) => {
 
   const isPinOrUnPin = (value) =>{
     setIsPined(value)
-    let data = {
-      isPined: value,
-      noteIdList: noteId
+    if(item!==undefined){
+      let data = {
+        isPined: value,
+        noteIdList: noteId
+      }
+     pinUnPinNotes(data).then((res)=>{
+      }).catch(err=>{
+        console.warn("error", err);
+      })
     }
-   pinUnPinNotes(data).then((res)=>{
-    }).catch(err=>{
-      console.warn("error", err);
-    })
   }
 
   const updateNoteColor = () => {
@@ -87,15 +89,17 @@ const CreateNote = ({navigation, route}) => {
 
   const updateArchivedNote = (value) => {
     setIsArchive(value)
-    let data = {
-      isArchived: value,
-      noteIdList: noteId 
-    }
-   setArchiveNote(data).then(res=>{
-  })
-    .catch(err=>{
-      console.warn("error", err);
+    if(item!==undefined){
+      let data = {
+        isArchived: value,
+        noteIdList: noteId 
+      }
+     setArchiveNote(data).then(res=>{
     })
+      .catch(err=>{
+        console.warn("error", err);
+      })
+    }
   }
   
   const handleChange = () => {
@@ -104,7 +108,7 @@ const CreateNote = ({navigation, route}) => {
       formData.append('description', description)
       formData.append('color', bgColor)
       formData.append('isPined', isPined)
-      formData.append('isArchive', isArchive)
+      formData.append('isArchived', isArchive)
       formData.append('labelIdList', JSON.stringify(labelId))
       formData.append('reminder', chipDateTime)
   if(item===undefined){
