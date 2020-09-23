@@ -9,7 +9,8 @@ const NoteApi = {
   pinUnpinNotes: '/notes/pinUnpinNotes',
   NoteColor: '/notes/changesColorNotes',
   ArchiveNote: '/notes/archiveNotes',
-  TrashNotes: '/notes/trashNotes'
+  TrashNotes: '/notes/trashNotes',
+  PermanentDeleteNotes: '/notes/deleteForeverNotes'
 };
 
 export default NoteApi;

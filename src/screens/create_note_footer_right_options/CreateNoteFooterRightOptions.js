@@ -7,7 +7,7 @@ import Delete from 'react-native-vector-icons/AntDesign';
 import Restore from 'react-native-vector-icons/MaterialIcons';
 import ColorList from '../color_list/ColorList';
 import styles from './styles'
-import { trashNotes } from '../../services/NoteService'
+import { trashNotes, permanentDeleteNotes } from '../../services/NoteService'
 
 const CreateNoteFooterRightOptions = ({setBgColor, navigation, noteId, showDeleteOptions}) => {
 
@@ -18,6 +18,20 @@ const CreateNoteFooterRightOptions = ({setBgColor, navigation, noteId, showDelet
         noteIdList: noteId
       }
       trashNotes(data).then(res=>{
+        navigation.navigate('drawer')
+      }).catch(err=>{
+        console.warn("error", err);
+      })
+    }
+  }
+
+  const permanentDeleteNote = () =>{
+    if(noteId !== null){
+      let data ={
+        isDeleted: true,
+        noteIdList: noteId
+      }
+      permanentDeleteNotes(data).then(res=>{
         navigation.navigate('drawer')
       }).catch(err=>{
         console.warn("error", err);
@@ -57,7 +71,7 @@ const CreateNoteFooterRightOptions = ({setBgColor, navigation, noteId, showDelet
           <Text style={styles.text}>Restore</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.option}
-          onPress={()=> trashNote(false)}>
+          onPress={()=> permanentDeleteNote()}>
           <Delete name="delete" size={25} />
           <Text style={styles.text}>Perment Delete</Text>
         </TouchableOpacity>

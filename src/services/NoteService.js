@@ -108,3 +108,16 @@ export const trashNotes = async (data) => {
         }
     )
 }
+
+export const permanentDeleteNotes = async (data) => {
+
+    var token = await AsyncStorage.getItem('userToken')
+    return axios.post(
+        URL+NoteApi.PermanentDeleteNotes,
+        data,{
+            headers:{
+                Authorization : token
+            }
+        }
+    )
+}
