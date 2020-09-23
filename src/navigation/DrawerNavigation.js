@@ -6,7 +6,7 @@ import Archive from 'react-native-vector-icons/Ionicons';
 import ReminderIocn from 'react-native-vector-icons/FontAwesome';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Text} from 'react-native';
-import CreateNewLable from '../screens/create_new_label/CreateNewLable'
+import Delete from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 const Drawer = createDrawerNavigator();
 
@@ -71,15 +71,15 @@ const DrawerNavigation = ({navigation}) => {
               }}
             />
             <Drawer.Screen
-              name="createNewLable"
-              component={CreateNewLable}
+              name="trash"
+              component={DashBoard}
               options={{
                 drawerLabel: () => (
                   <Text style={{fontSize: 18, textAlign: 'left'}}>
-                    Create New Lable
+                    Trash
                   </Text>
                 ),
-                drawerIcon: () => <NoteIcon name="plus" size={20} />
+                drawerIcon: () => <Delete name="delete" size={20} />
               }}
             />
           </Drawer.Navigator>
