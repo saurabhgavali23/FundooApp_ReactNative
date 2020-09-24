@@ -30,6 +30,7 @@ const CreateNote = ({navigation, route}) => {
   const [isArchive, setIsArchive] = useState(item!=undefined?item.isArchived:false)
   const [isPined, setIsPined] = useState(item!==undefined?item.isPined:false)
   const [labelId, setLabelId] = useState([])
+  const [flag, setFlag] = useState(Math.random())  
   let noteId = []
   noteId.push(item!==undefined?item.id:null)
   
@@ -48,7 +49,7 @@ const CreateNote = ({navigation, route}) => {
          label12.push(res.data.id)
          setLabelId(label12) 
       }).catch(err=>{
-        console.warn("error", err);
+        console.warn("error+ saveLabel", err);
       })
     }
   })
@@ -77,14 +78,16 @@ const CreateNote = ({navigation, route}) => {
   }
 
   const updateNoteColor = () => {
-    let data = {
-      color: bgColor,
-      noteIdList: noteId
+    if(item!==undefined && bgColor!==''){
+      let data = {
+        color: bgColor,
+        noteIdList: noteId
+      }
+     setNoteColor(data).then(res=>{})
+      .catch(err=>{
+        console.warn("error", err);
+      })
     }
-   setNoteColor(data).then(res=>{})
-    .catch(err=>{
-      console.warn("error", err);
-    })
   }
 
   const updateArchivedNote = (value) => {
@@ -115,7 +118,7 @@ const CreateNote = ({navigation, route}) => {
     saveNotes(formData)
       .then((res) => {
         if (res.status === 200) {
-          navigation.navigate('drawer');
+          navigation.navigate('dashBoard',{ flag: flag });
         }
       })
       .catch((err) => {});
@@ -126,7 +129,7 @@ const CreateNote = ({navigation, route}) => {
         formData.append('noteId', item.id)
       updateNotes(formData).then((res)=>{
         if (res.status === 200) {
-          navigation.navigate('drawer');
+          navigation.navigate('dashBoard',{ flag: flag });
         }
       }).catch((err) => {
         console.warn("note not update");

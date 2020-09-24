@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import Share from 'react-native-vector-icons/AntDesign';
 import Copy from 'react-native-vector-icons/Ionicons';
@@ -10,6 +10,7 @@ import styles from './styles'
 import { trashNotes, permanentDeleteNotes } from '../../services/NoteService'
 
 const CreateNoteFooterRightOptions = ({setBgColor, navigation, noteId, showDeleteOptions}) => {
+const [flag, setFlag] = useState(Math.random())
 
   const trashNote = (value) => {
     if(noteId !== null){
@@ -18,7 +19,7 @@ const CreateNoteFooterRightOptions = ({setBgColor, navigation, noteId, showDelet
         noteIdList: noteId
       }
       trashNotes(data).then(res=>{
-        navigation.navigate('drawer')
+        navigation.navigate('dashBoard',{flag: flag})
       }).catch(err=>{
         console.warn("error", err);
       })
@@ -32,7 +33,7 @@ const CreateNoteFooterRightOptions = ({setBgColor, navigation, noteId, showDelet
         noteIdList: noteId
       }
       permanentDeleteNotes(data).then(res=>{
-        navigation.navigate('drawer')
+        navigation.navigate('dashBoard',{flag: flag})
       }).catch(err=>{
         console.warn("error", err);
       })

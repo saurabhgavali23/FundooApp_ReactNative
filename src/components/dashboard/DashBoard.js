@@ -11,7 +11,7 @@ import NoteList from '../../screens/note_list/NoteList';
 import NoteViewIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const DashBoard = ({navigation, route}) => {
-  const { isReminderList = false, isArchive = false, isDeleted = false } = route.params || {}
+  const { isReminderList = false, isArchive = false, isDeleted = false, flag = 0 } = route.params || {}
   const refRBSheet = useRef();
   const [isList, setIsList] = useState(false)
 
@@ -51,6 +51,7 @@ const DashBoard = ({navigation, route}) => {
       isReminderList={isReminderList} 
       isArchive={isArchive}
       isDeleted={isDeleted}
+      flag={flag}
       />
       </View>
       <View style={styles.plusicon}>

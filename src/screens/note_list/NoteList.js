@@ -4,11 +4,11 @@ import {getNotes} from '../../services/NoteService';
 import styles from './styles';
 import DisplayCard from './DispalyCard';
 
-const NoteList = ({isList, navigation, isReminderList, isArchive, isDeleted}) => {
+const NoteList = ({isList, navigation, isReminderList, isArchive, isDeleted, flag}) => {
   const [isPined, setIsPined] = useState(true);
   const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  
   useEffect(() => {
     getNotes()
       .then((res) => {
@@ -19,7 +19,7 @@ const NoteList = ({isList, navigation, isReminderList, isArchive, isDeleted}) =>
       .catch((err) => {
         console.warn('something wrong');
       });
-  }, []);
+  }, [flag]);
 
   if (isLoading) {
     return (
