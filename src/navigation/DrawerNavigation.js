@@ -7,7 +7,9 @@ import ReminderIocn from 'react-native-vector-icons/FontAwesome';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Text} from 'react-native';
 import Delete from 'react-native-vector-icons/AntDesign';
+import Label from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import CreateNewLable from '../screens/create_new_label/CreateNewLable'
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = ({navigation}) => {
@@ -52,6 +54,18 @@ const DrawerNavigation = ({navigation}) => {
                   </TouchableOpacity>
                 ),
                 drawerIcon: () => <ReminderIocn name="bell-o" size={18} />,
+              }}
+            />
+            <Drawer.Screen
+              name="createNewLabel"
+              component={CreateNewLable}
+              options={{
+                drawerLabel: () => (
+                  <Text style={{fontSize: 18, textAlign: 'left'}}>
+                    Create New Label
+                  </Text>
+                ),
+                drawerIcon: () => <Label name="plus" size={20} />
               }}
             />
             <Drawer.Screen

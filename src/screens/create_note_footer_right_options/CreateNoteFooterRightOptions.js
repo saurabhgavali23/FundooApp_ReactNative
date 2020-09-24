@@ -57,7 +57,7 @@ const [flag, setFlag] = useState(Math.random())
         <Share name="sharealt" size={27} />
         <Text style={styles.text}>Send</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.option} onPress={()=>navigation.navigate('createNewLable')}>
+      <TouchableOpacity style={styles.option} onPress={()=>navigation.navigate('createNewLabel')}>
         <Labels name="label-outline" size={25} />
         <Text style={styles.text}>Labels</Text>
       </TouchableOpacity>
