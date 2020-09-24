@@ -9,7 +9,7 @@ import {Text} from 'react-native';
 import Delete from 'react-native-vector-icons/AntDesign';
 import Label from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import CreateNewLable from '../screens/create_new_label/CreateNewLable'
+import CreateNewLabel from '../screens/create_new_label/CreateNewLabel'
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = ({navigation}) => {
@@ -58,7 +58,7 @@ const DrawerNavigation = ({navigation}) => {
             />
             <Drawer.Screen
               name="createNewLabel"
-              component={CreateNewLable}
+              component={CreateNewLabel}
               options={{
                 drawerLabel: () => (
                   <Text style={{fontSize: 18, textAlign: 'left'}}>
