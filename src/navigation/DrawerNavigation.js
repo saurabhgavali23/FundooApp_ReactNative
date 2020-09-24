@@ -70,7 +70,7 @@ const DrawerNavigation = ({navigation}) => {
                   </Text>
                   </TouchableOpacity>
                 ),
-                drawerIcon: () => <Archive name="archive" size={20} />
+                drawerIcon: () => <Archive name="archive-outline" size={20} />
               }}
             />
             <Drawer.Screen
