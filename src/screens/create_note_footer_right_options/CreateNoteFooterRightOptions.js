@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import Share from 'react-native-vector-icons/AntDesign';
+import Collaborator from 'react-native-vector-icons/Feather';
 import Copy from 'react-native-vector-icons/Ionicons';
 import Labels from 'react-native-vector-icons/MaterialCommunityIcons';
 import Delete from 'react-native-vector-icons/AntDesign';
@@ -56,6 +57,10 @@ const [flag, setFlag] = useState(Math.random())
       <TouchableOpacity style={styles.option}>
         <Share name="sharealt" size={27} />
         <Text style={styles.text}>Send</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.option}>
+      <Collaborator name="user-plus" size={27} />
+        <Text style={styles.text}>Collaborator</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.option} onPress={()=>navigation.navigate('createNewLabel')}>
         <Labels name="label-outline" size={25} />

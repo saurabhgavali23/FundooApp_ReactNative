@@ -3,12 +3,12 @@ import { StyleSheet } from "react-native"
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      marginTop: '10%',
+      marginTop: '6%',
       marginLeft: '5%',
     },
     option: {
       flexDirection: 'row',
-      marginBottom: '5%',
+      marginBottom: '4%',
     },
     text: {
       fontSize: 20,
