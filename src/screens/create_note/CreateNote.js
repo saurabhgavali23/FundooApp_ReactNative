@@ -19,7 +19,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const CreateNote = ({navigation, route}) => {
   const refRBSheet = useRef();
-  const {addLabels = undefined, item = undefined, reminder = '', showDeleteOptions = false, collaborator = undefined} = route.params ?? {};
+  const {addLabels = undefined, item = undefined, reminder = '', showDeleteOptions = false, collaborator = []} = route.params ?? {};
   const [title, setTitle] = useState(item!==undefined?item.title:'');
   const [description, setDescription] = useState(item!==undefined?item.description:'');
   const [optionsToggle, setOptionsToggle] = useState(false)
@@ -33,7 +33,11 @@ const CreateNote = ({navigation, route}) => {
   const [flag, setFlag] = useState(Math.random())
   let noteId = []
   noteId.push(item!==undefined?item.id:null)
-  
+  if(item!==undefined){
+    item.collaborators.map(value=>{
+      collaborator.push(value)
+    })
+  }
   useEffect(() => {
     AsyncStorage.getItem('userId').then(res=>{
      var userId = res;
@@ -217,8 +221,8 @@ const CreateNote = ({navigation, route}) => {
             title={value.firstName}
             avatar={true}
             avatarStyle={styles.collabAvatar}
-            backgroundColor='#F0FFF0'
-        />
+            backgroundColor={bgColor}
+          />
           ))
         ): null}
       </View>
