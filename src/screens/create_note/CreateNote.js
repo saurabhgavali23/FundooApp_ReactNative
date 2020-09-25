@@ -33,12 +33,7 @@ const CreateNote = ({navigation, route}) => {
   const [flag, setFlag] = useState(Math.random())
   let noteId = []
   noteId.push(item!==undefined?item.id:null)
-  let collabUserDetails = []
-  if(collaborator!==undefined){
-    collaborator.map(value=>{
-      collabUserDetails.push(value)
-    })
-  }
+  
   useEffect(() => {
     AsyncStorage.getItem('userId').then(res=>{
      var userId = res;
@@ -119,7 +114,7 @@ const CreateNote = ({navigation, route}) => {
       formData.append('isArchived', isArchive)
       formData.append('labelIdList', JSON.stringify(labelId))
       formData.append('reminder', chipDateTime)
-      formData.append('collaberators', JSON.stringify(collabUserDetails))
+      formData.append('collaberators', JSON.stringify(collaborator))
   if(item===undefined){
     saveNotes(formData)
       .then((res) => {
