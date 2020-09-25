@@ -53,6 +53,14 @@ const styles = StyleSheet.create({
     addLabelChip:{
       width: '40%',
       marginTop: '1%'
+    },
+    collaboratorChip:{
+      marginTop: '1%',
+      width: '10%',
+      marginLeft: '10%',
+    },
+    collabAvatar:{
+      backgroundColor:'#F0FFF0',
     }
   });
 

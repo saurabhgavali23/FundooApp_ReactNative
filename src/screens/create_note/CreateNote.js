@@ -206,6 +206,18 @@ const CreateNote = ({navigation, route}) => {
         />
         ): null}
       </View>
+      <View style={styles.collaboratorChip}>
+        {
+          collaborator!==undefined ? (
+          <RNChipView
+          maxWidth={10}
+          title={collaborator}
+          avatar={true}
+          avatarStyle={styles.collabAvatar}
+          backgroundColor='#F0FFF0'
+        />
+        ): null}
+      </View>
         <View style={styles.footerContainer}>
           <TouchableOpacity onPress={()=> handleBottomSheet(true)}>
           <PlusBox name="plus-square" size={25} />
