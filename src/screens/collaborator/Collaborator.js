@@ -6,9 +6,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import User from 'react-native-vector-icons/FontAwesome'
 import AddUser from 'react-native-vector-icons/Feather'
 
-const Collaborator = () => {
+const Collaborator = ({navigation}) => {
 
 const [email, setEmail] = useState('@email');
+const [isValidEmail, setIsValidEmail] = useState(false)
+const [userEmail, setUserEmail] = useState();
 
   try {
     AsyncStorage.getItem('userData').then((res) => {
@@ -17,13 +19,33 @@ const [email, setEmail] = useState('@email');
   } catch {
     console.warn('Somthing Went Wrong');
   }
+
+  const emailValidation = () => {
+    var emailReg = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    if (!emailReg.test(userEmail)) {
+      setIsValidEmail(true);
+      return false
+    } else {
+      setIsValidEmail(false);
+      return true
+    }
+  };
+
+  const handleSaveData = () => {
+    if(emailValidation()){
+    navigation.navigate('createNote',{ collaborator: userEmail })
+    }
+  }
+
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <ArrowLeft name="arrow-left" size={32}/>
+                <ArrowLeft name="arrow-left" size={32} 
+                onPress={()=>navigation.navigate('createNote')}/>
                 <View style={styles.collabAndSaveContainer}>
                 <Text style={styles.title}>Collaborator</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> handleSaveData()}>
                 <Text style={styles.saveTitle}>SAVE</Text>
                 </TouchableOpacity>
                 </View>
@@ -36,7 +58,16 @@ const [email, setEmail] = useState('@email');
                 <AddUser name='user-plus' size={25}/>
                 <TextInput style={styles.inputEmail} 
                 autoFocus={true}
-                placeholder='Person or email to share with'/>
+                placeholder='Person or email to share with'
+                onChangeText={(value)=>setUserEmail(value)}
+                />
+            </View>
+            <View style={styles.errorContainer}>
+            {
+              isValidEmail === true? 
+                <Text style={styles.textError}>Invalid Email Id</Text>
+                : null
+            }
             </View>
         </View>
     )

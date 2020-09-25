@@ -19,7 +19,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const CreateNote = ({navigation, route}) => {
   const refRBSheet = useRef();
-  const {addLabels = undefined, item = undefined, reminder = '', showDeleteOptions = false} = route.params ?? {};
+  const {addLabels = undefined, item = undefined, reminder = '', showDeleteOptions = false, collaborator = undefined} = route.params ?? {};
   const [title, setTitle] = useState(item!==undefined?item.title:'');
   const [description, setDescription] = useState(item!==undefined?item.description:'');
   const [optionsToggle, setOptionsToggle] = useState(false)
@@ -49,7 +49,7 @@ const CreateNote = ({navigation, route}) => {
          label12.push(res.data.id)
          setLabelId(label12) 
       }).catch(err=>{
-        console.warn("error+ saveLabel", err);
+        console.warn("error", err);
       })
     }
   })

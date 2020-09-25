@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderBottomWidth: 2,
         borderBottomColor: '#fff',
-        height: '7%'
+        marginTop: '2%'
     },
     title:{
         fontSize: 20,
@@ -44,6 +44,13 @@ const styles = StyleSheet.create({
     inputEmail:{
         fontSize: 17,
         marginLeft: '7%',
+    },
+    errorContainer:{
+        marginLeft: '22%'
+    },
+    textError:{
+        color: 'red', 
+        fontSize: 15
     }
 })
 
