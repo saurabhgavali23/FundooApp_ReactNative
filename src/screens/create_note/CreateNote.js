@@ -119,7 +119,7 @@ const CreateNote = ({navigation, route}) => {
       formData.append('isArchived', isArchive)
       formData.append('labelIdList', JSON.stringify(labelId))
       formData.append('reminder', chipDateTime)
-      formData.append('collaberator', JSON.stringify(collabUserDetails))
+      formData.append('collaberators', JSON.stringify(collabUserDetails))
   if(item===undefined){
     saveNotes(formData)
       .then((res) => {

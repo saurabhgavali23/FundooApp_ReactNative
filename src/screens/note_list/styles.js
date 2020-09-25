@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
         fontSize: 20, 
         marginLeft: '4%', 
         marginTop: '2%'
+    },
+    collaborator:{
+        marginTop:'1%',
+        alignItems: 'flex-start'
     }
 });
 
