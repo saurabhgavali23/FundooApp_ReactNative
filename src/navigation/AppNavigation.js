@@ -8,6 +8,7 @@ import SendEmail from '../screens/send_email/SendEmail';
 import CreateNote from '../screens/create_note/CreateNote';
 import DrawerNavigation from './DrawerNavigation';
 import { isLoggedIn } from '../config/configuration';
+import Collaborator from '../screens/collaborator/Collaborator';
 
 const stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ const AppNavigation = () => {
           <stack.Screen options={{headerShown: false}} name="sendEmail" component={SendEmail} />
           <stack.Screen options={{headerShown: false}} name="drawer" component={DrawerNavigation} />
           <stack.Screen options={{headerShown: false}} name="createNote" component={CreateNote} />
+          <stack.Screen options={{headerShown: false}} name="collaborator" component={Collaborator} />
         </stack.Navigator>
       </NavigationContainer>
   );
