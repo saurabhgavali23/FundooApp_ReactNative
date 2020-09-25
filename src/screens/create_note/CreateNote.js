@@ -30,10 +30,15 @@ const CreateNote = ({navigation, route}) => {
   const [isArchive, setIsArchive] = useState(item!=undefined?item.isArchived:false)
   const [isPined, setIsPined] = useState(item!==undefined?item.isPined:false)
   const [labelId, setLabelId] = useState([])
-  const [flag, setFlag] = useState(Math.random())  
+  const [flag, setFlag] = useState(Math.random())
   let noteId = []
   noteId.push(item!==undefined?item.id:null)
-  
+  let collabUserDetails = []
+  if(collaborator!==undefined){
+    collaborator.map(value=>{
+      collabUserDetails.push(value)
+    })
+  }
   useEffect(() => {
     AsyncStorage.getItem('userId').then(res=>{
      var userId = res;
@@ -114,6 +119,7 @@ const CreateNote = ({navigation, route}) => {
       formData.append('isArchived', isArchive)
       formData.append('labelIdList', JSON.stringify(labelId))
       formData.append('reminder', chipDateTime)
+      formData.append('collaberator', JSON.stringify(collabUserDetails))
   if(item===undefined){
     saveNotes(formData)
       .then((res) => {
@@ -209,13 +215,16 @@ const CreateNote = ({navigation, route}) => {
       <View style={styles.collaboratorChip}>
         {
           collaborator!==undefined ? (
+          collaborator.map((value,index)=>(
           <RNChipView
-          maxWidth={10}
-          title={collaborator}
-          avatar={true}
-          avatarStyle={styles.collabAvatar}
-          backgroundColor='#F0FFF0'
+            key={index}
+            maxWidth={10}
+            title={value.firstName}
+            avatar={true}
+            avatarStyle={styles.collabAvatar}
+            backgroundColor='#F0FFF0'
         />
+          ))
         ): null}
       </View>
         <View style={styles.footerContainer}>

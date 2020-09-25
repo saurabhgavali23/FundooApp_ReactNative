@@ -5,6 +5,7 @@ import ArrowLeft from 'react-native-vector-icons/Feather';
 import AsyncStorage from '@react-native-community/async-storage';
 import User from 'react-native-vector-icons/FontAwesome'
 import AddUser from 'react-native-vector-icons/Feather'
+import { searchUserDetails } from '../../services/userService';
 
 const Collaborator = ({navigation}) => {
 
@@ -33,7 +34,14 @@ const [userEmail, setUserEmail] = useState();
 
   const handleSaveData = () => {
     if(emailValidation()){
-    navigation.navigate('createNote',{ collaborator: userEmail })
+      let data={
+        searchWord: userEmail
+      }
+      searchUserDetails(data).then(res=>{
+        navigation.navigate('createNote',{ collaborator: res.data.data.details })
+      }).catch(err=>{
+        console.warn(err,"User Not Found");
+      })
     }
   }
 

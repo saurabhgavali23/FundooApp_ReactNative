@@ -44,3 +44,16 @@ export const sendEmail = (Email) =>{
         }
     )
 }
+
+export const searchUserDetails = async (data) =>{
+
+    var token = await AsyncStorage.getItem('userToken')
+    return axios.post(
+        Config.REACT_APP_BASE_URL+NoteApi.SearchUserDetails,
+        data,{
+            headers:{
+                Authorization: token
+            }
+        }
+    )
+}

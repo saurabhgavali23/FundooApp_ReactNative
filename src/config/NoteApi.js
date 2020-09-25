@@ -10,7 +10,8 @@ const NoteApi = {
   NoteColor: '/notes/changesColorNotes',
   ArchiveNote: '/notes/archiveNotes',
   TrashNotes: '/notes/trashNotes',
-  PermanentDeleteNotes: '/notes/deleteForeverNotes'
+  PermanentDeleteNotes: '/notes/deleteForeverNotes',
+  SearchUserDetails: '/user/searchUserList'
 };
 
 export default NoteApi;
