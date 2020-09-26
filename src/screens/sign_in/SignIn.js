@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {View, StatusBar, TouchableOpacity} from 'react-native';
 import {Input, Button, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {setSnackBarMsg} from '../../config/configuration';
 import {login} from '../../services/userService';
 import styles from './styles';
+import { AuthContext } from '../../components/context';
 
 export const SignIn = ({navigation}) => {
   const [Email, setEmail] = useState('');
@@ -16,18 +17,20 @@ export const SignIn = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isEyeOff, setIsEyeOff] = useState(true)
 
+  const {signIn} = useContext(AuthContext)
+
   const handleChange = () => {
     setIsLoading(true)
     login(Email, Password)
       .then( (res) => {
       try{
-        let userToken = res.data.id
+        var userToken = res.data.id
         let userId = res.data.userId
         AsyncStorage.multiSet([['userToken', userToken],['userData', JSON.stringify(res.data)],['userId', userId]])
       }catch(error){console.warn(error)}
         setIsLoading(false)
         setSnackBarMsg('Login Sucessfull','green');
-        navigation.navigate('drawer');
+        signIn(userToken);
       })
       .catch((err) => {
         setIsLoading(false)
